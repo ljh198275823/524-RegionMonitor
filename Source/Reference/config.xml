@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<configuration>
+  <appSettings>
+    <add key="ConnectString" value="$mn&lt;m?xoRp$cp\) Ipz v51xy/uxY 9G|TpqOUsW4HG{%{D}*llQ{^2sB47m:hXO#bye?eY?5jVW~x&amp;9squs(b9A?g;HHt|d},QMC?}q5$Nuz];g6Vr|_LS&lt;jvDDT|e#@r_e9=;qVi04:$Bl+kXBo=`9e6&amp;sh/D}Rfd Gr)z{dhz02kZ K+w._~y}U8y#43i" />
+    <add key="DatabaseNeedUpgrade" value="True" />
+    <add key="RememberLogID" value="True" />
+  </appSettings>
+</configuration>

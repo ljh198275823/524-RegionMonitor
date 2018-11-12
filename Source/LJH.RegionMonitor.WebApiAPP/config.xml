@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<configuration>
+  <appSettings>
+    <add key="ConnectString" value="" />
+    <add key="DatabaseNeedUpgrade" value="True" />
+    <add key="RememberLogID" value="True" />
+    <add key="TotalLifts" value="67" />
+  </appSettings>
+</configuration>
