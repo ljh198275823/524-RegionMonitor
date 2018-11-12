@@ -52,7 +52,7 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Ralid.ico</ApplicationIcon>
+    <ApplicationIcon>view.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -81,16 +81,55 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppSettings.cs" />
+    <Compile Include="FrmDoorSelection.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmDoorSelection.designer.cs">
+      <DependentUpon>FrmDoorSelection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmCardEventReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmCardEventReport.designer.cs">
+      <DependentUpon>FrmCardEventReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmMonitorSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMonitorSetting.designer.cs">
+      <DependentUpon>FrmMonitorSetting.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="FrmReportBase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmReportBase.designer.cs">
+      <DependentUpon>FrmReportBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCDateTimeInterval.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCDateTimeInterval.designer.cs">
+      <DependentUpon>UCDateTimeInterval.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="FrmDoorSelection.resx">
+      <DependentUpon>FrmDoorSelection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmCardEventReport.resx">
+      <DependentUpon>FrmCardEventReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmMonitorSetting.resx">
+      <DependentUpon>FrmMonitorSetting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -102,6 +141,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="FrmReportBase.resx">
+      <DependentUpon>FrmReportBase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UCDateTimeInterval.resx">
+      <DependentUpon>UCDateTimeInterval.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -117,12 +162,16 @@
     <Content Include="config.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Ralid.ico" />
+    <Content Include="view.ico" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LJH.GeneralLibrary\LJH.GeneralLibrary.csproj">
       <Project>{d1b09a6e-6111-46eb-b1b5-7ed1e31bc416}</Project>
       <Name>LJH.GeneralLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LJH.RegionMonitor.Model\LJH.RegionMonitor.Model.csproj">
+      <Project>{ba3720fd-4050-40ac-b9ac-49308182ad8e}</Project>
+      <Name>LJH.RegionMonitor.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\LJH.RegionMonitor.WebAPIClient\LJH.RegionMonitor.WebAPIClient.csproj">
       <Project>{f95707e8-c1c0-42e2-a46a-498c78f764ae}</Project>
@@ -133,5 +182,6 @@
       <Name>LJH.RegionMonitor.WebAPI</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -46,7 +46,7 @@ namespace LJH.RegionMonitor.WebApiAPP
         {
             try
             {
-                WebHostStarter.StartWebListenerHost(_URL,AppSettings .Current .ConnStr );
+                WebHostStarter.StartWebListenerHost(_URL, AppSettings.Current.ConnStr);
                 lblWebhostState.Text = "WebApi服务启动";
                 lblWebhostState.ForeColor = Color.Blue;
             }
@@ -75,5 +75,19 @@ namespace LJH.RegionMonitor.WebApiAPP
             System.Environment.Exit(0);
         }
         #endregion
+
+        private void btnRegion_Click(object sender, EventArgs e)
+        {
+            FrmMonitorSetting frm = new FrmMonitorSetting();
+            frm.StartPosition = FormStartPosition.CenterParent;
+            frm.ShowDialog();
+        }
+
+        private void btnCardEvent_Click(object sender, EventArgs e)
+        {
+            var frm = new FrmFullLogReport();
+            frm.StartPosition = FormStartPosition.CenterParent;
+            frm.ShowDialog();
+        }
     }
 }
