@@ -15,6 +15,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.SqlServer;
+using LJH.OneCard.HKVisionClient;
 
 namespace LJH.RegionMonitor.WebAPI
 {
@@ -34,6 +35,8 @@ namespace LJH.RegionMonitor.WebAPI
             services.AddRouting();
             services.AddMvc();
             services.AddResponseCompression(); //增加HTTP回复压缩功能
+            var hkclient = new HKVisionClient(Configuration["HKVisionUrl"], Configuration["HKVisionAppKey"], Configuration["HKVisionSecret"]);
+            services.AddSingleton<HKVisionClient>(hkclient);
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {

@@ -50,6 +50,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\LJH.GeneralLibrary\LJH.GeneralLibrary.csproj" />
+    <ProjectReference Include="..\LJH.OneCard.HKVisionClient\LJH.OneCard.HKVisionClient.csproj" />
     <ProjectReference Include="..\LJH.RegionMonitor.Model\LJH.RegionMonitor.Model.csproj" />
   </ItemGroup>
 

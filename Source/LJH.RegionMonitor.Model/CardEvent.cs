@@ -9,14 +9,14 @@ namespace LJH.RegionMonitor.Model
     /// <summary>
     /// 表示刷卡记录
     /// </summary>
-    public class CardEvent : LJH.GeneralLibrary.Core.IEntity<int>
+    public class CardEvent : LJH.GeneralLibrary.Core.IEntity<string>
     {
         #region 构造函数
         public CardEvent() { }
         #endregion
 
         #region 公共属性
-        public int ID { get; set; }
+        public string ID { get; set; }
         /// <summary>
         /// 获取或设置卡号
         /// </summary>

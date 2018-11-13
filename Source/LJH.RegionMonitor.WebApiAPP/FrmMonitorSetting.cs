@@ -23,7 +23,7 @@ namespace LJH.RegionMonitor.WebApiAPP
         private void ShowRegion(Region region)
         {
             txtName.Text = region.Name;
-            var doors = new DoorClient(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
+            var doors = new DoorClient(AppSettings.Current.ConnStr).GetItems(null, true).QueryObjects;
             if (doors == null || doors.Count == 0) return;
             viewEntrance.Rows.Clear();
             if (region.EnterDoors != null && region.EnterDoors.Count > 0)
@@ -81,6 +81,7 @@ namespace LJH.RegionMonitor.WebApiAPP
         #region 事件处理程序
         private void FrmMonitorSetting_Load(object sender, EventArgs e)
         {
+            MonitorRegion = new RegionClient(AppSettings.Current.ConnStr).GetByID(1, true).QueryObject;
             if (MonitorRegion != null) ShowRegion(MonitorRegion);
         }
 
@@ -150,7 +151,8 @@ namespace LJH.RegionMonitor.WebApiAPP
         private void btnOk_Click(object sender, EventArgs e)
         {
             if (!CheckInput()) return;
-            var region = new Region();
+            var region = MonitorRegion != null ? MonitorRegion : new Region();
+            region.ID = 1;
             region.Name = txtName.Text;
             region.EnterDoors = new List<string>();
             foreach (DataGridViewRow row in viewEntrance.Rows)
@@ -162,7 +164,7 @@ namespace LJH.RegionMonitor.WebApiAPP
             {
                 region.ExitDoors.Add((row.Tag as Door).ID);
             }
-            var ret = new RegionClient(AppSettings.Current.ConnStr).Add(region);
+            var ret = new RegionClient(AppSettings.Current.ConnStr).Add(region, true);
             if (ret.Result == GeneralLibrary.Core.ResultCode.Successful) this.DialogResult = DialogResult.OK;
             else
             {

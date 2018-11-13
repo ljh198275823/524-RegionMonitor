@@ -58,16 +58,27 @@ namespace LJH.RegionMonitor.WebAPI
 
         protected abstract QueryResult<TEntity> GetingItemByID(TID id);
 
-
         protected abstract QueryResultList<TEntity> GetingItems(SearchCondition search);
 
-        protected abstract CommandResult<TEntity> AddEntity(TEntity info);
+        protected virtual CommandResult<TEntity> AddEntity(TEntity info)
+        {
+            throw new Exception("子类没有实现此方法");
+        }
 
-        protected abstract CommandResult<TEntity> UpdateEntity(TEntity info, TEntity original);
+        protected virtual CommandResult<TEntity> UpdateEntity(TEntity info, TEntity original)
+        {
+            throw new Exception("子类没有实现此方法");
+        }
 
-        protected abstract CommandResult<TEntity> PatchEntity(TEntity info, Dictionary<string, string> patches);
+        protected virtual CommandResult<TEntity> PatchEntity(TEntity info, Dictionary<string, string> patches)
+        {
+            throw new Exception("子类没有实现此方法");
+        }
 
-        protected abstract CommandResult DeleteEntity(TEntity info);
+        protected virtual CommandResult DeleteEntity(TEntity info)
+        {
+            throw new Exception("子类没有实现此方法");
+        }
         #endregion
 
         #region 公共方法

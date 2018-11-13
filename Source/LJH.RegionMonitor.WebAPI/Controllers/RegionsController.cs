@@ -34,6 +34,11 @@ namespace LJH.RegionMonitor.WebAPI.Controllers
             return new QueryResult<Region>(ResultCode.Fail, "没有找到相关数据", null);
         }
 
+        protected override QueryResultList<Region> GetingItems(SearchCondition search)
+        {
+            throw new NotImplementedException();
+        }
+
         protected override CommandResult<Region> AddEntity(Region info)
         {
             if (info.ID == 0) info.ID = 1;
@@ -54,16 +59,6 @@ namespace LJH.RegionMonitor.WebAPI.Controllers
             var path = Path.Combine(Directory.GetCurrentDirectory(), "Regions", $"{info.ID }.region");
             if (System.IO.File.Exists(path)) System.IO.File.Delete(path);
             return new CommandResult(ResultCode.Successful, string.Empty);
-        }
-
-        protected override CommandResult<Region> PatchEntity(Region info, Dictionary<string, string> patches)
-        {
-            throw new NotImplementedException();
-        }
-
-        protected override QueryResultList<Region> GetingItems(SearchCondition search)
-        {
-            throw new NotImplementedException();
         }
         #endregion
     }

@@ -27,10 +27,7 @@ namespace LJH.RegionMonitor.WebApiAPP
         {
             CardEventSearchCondition con = new CardEventSearchCondition();
             con.EventTime = new GeneralLibrary.DateTimeRange(ucDateTimeInterval1.StartDateTime, ucDateTimeInterval1.EndDateTime);
-            //con.CardID = txtCardID.Text.Trim();
-            //con.Name = txtUsername.Text.Trim();
-            //con.Department = txtDepartment.Text.Trim();
-            var record = new CardEventClient(AppSettings.Current.ConnStr).GetItems(con).QueryObjects;
+            var record = new CardEventClient(AppSettings.Current.ConnStr).GetItems(con,true).QueryObjects;
             if (record != null && record.Count > 0)
             {
                 return (from it in record

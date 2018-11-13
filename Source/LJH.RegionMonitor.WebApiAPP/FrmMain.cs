@@ -24,24 +24,6 @@ namespace LJH.RegionMonitor.WebApiAPP
         #endregion
 
         #region 私有方法
-        private bool CheckConnect(string conStr)
-        {
-            try
-            {
-                using (SqlConnection con = new SqlConnection())
-                {
-                    con.ConnectionString = conStr;
-                    con.Open();
-                    con.Close();
-                    return true;
-                }
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
         private void StartWebHost()
         {
             try
@@ -64,6 +46,7 @@ namespace LJH.RegionMonitor.WebApiAPP
             this.Text += string.Format(" [{0}]", Application.ProductVersion);
             lblUrl.Text = _URL;
             StartWebHost();
+            AppSettings.Current.ConnStr = @"http://localhost:13002/rm/api";
         }
 
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)

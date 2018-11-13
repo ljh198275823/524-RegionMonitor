@@ -31,8 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmFullLogReport));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ucDateTimeInterval1 = new LJH.GeneralLibrary.WinformControl.UCDateTimeInterval();
-            this.chk有效事件 = new System.Windows.Forms.CheckBox();
-            this.chk无效事件 = new System.Windows.Forms.CheckBox();
             this.viewEvent = new System.Windows.Forms.DataGridView();
             this.colEventDateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCardID = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,8 +45,8 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(479, 25);
-            this.btnSearch.Size = new System.Drawing.Size(174, 56);
+            this.btnSearch.Location = new System.Drawing.Point(291, 18);
+            this.btnSearch.Size = new System.Drawing.Size(176, 74);
             // 
             // groupBox1
             // 
@@ -69,32 +67,6 @@
             this.ucDateTimeInterval1.Size = new System.Drawing.Size(221, 74);
             this.ucDateTimeInterval1.StartDateTime = new System.DateTime(2012, 6, 2, 10, 42, 8, 482);
             this.ucDateTimeInterval1.TabIndex = 1;
-            // 
-            // chk有效事件
-            // 
-            this.chk有效事件.AutoSize = true;
-            this.chk有效事件.Checked = true;
-            this.chk有效事件.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk有效事件.ForeColor = System.Drawing.Color.Blue;
-            this.chk有效事件.Location = new System.Drawing.Point(260, 25);
-            this.chk有效事件.Name = "chk有效事件";
-            this.chk有效事件.Size = new System.Drawing.Size(72, 16);
-            this.chk有效事件.TabIndex = 109;
-            this.chk有效事件.Text = "有效事件";
-            this.chk有效事件.UseVisualStyleBackColor = true;
-            // 
-            // chk无效事件
-            // 
-            this.chk无效事件.AutoSize = true;
-            this.chk无效事件.Checked = true;
-            this.chk无效事件.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk无效事件.ForeColor = System.Drawing.Color.Red;
-            this.chk无效事件.Location = new System.Drawing.Point(260, 58);
-            this.chk无效事件.Name = "chk无效事件";
-            this.chk无效事件.Size = new System.Drawing.Size(72, 16);
-            this.chk无效事件.TabIndex = 108;
-            this.chk无效事件.Text = "无效事件";
-            this.chk无效事件.UseVisualStyleBackColor = true;
             // 
             // viewEvent
             // 
@@ -179,8 +151,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(983, 482);
-            this.Controls.Add(this.chk有效事件);
-            this.Controls.Add(this.chk无效事件);
             this.Controls.Add(this.viewEvent);
             this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -189,8 +159,6 @@
             this.Controls.SetChildIndex(this.btnSearch, 0);
             this.Controls.SetChildIndex(this.groupBox1, 0);
             this.Controls.SetChildIndex(this.viewEvent, 0);
-            this.Controls.SetChildIndex(this.chk无效事件, 0);
-            this.Controls.SetChildIndex(this.chk有效事件, 0);
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.viewEvent)).EndInit();
             this.ResumeLayout(false);
@@ -203,8 +171,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private LJH.GeneralLibrary.WinformControl.UCDateTimeInterval ucDateTimeInterval1;
         private System.Windows.Forms.DataGridView viewEvent;
-        private System.Windows.Forms.CheckBox chk有效事件;
-        private System.Windows.Forms.CheckBox chk无效事件;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEventDateTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCardID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUserName;

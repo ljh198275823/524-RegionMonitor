@@ -45,7 +45,7 @@ namespace LJH.RegionMonitor.WebApiAPP
         #region 事件处理
         private void FrmDoorSelection_Load(object sender, EventArgs e)
         {
-            List<Door> doors = new DoorClient(AppSettings.Current.ConnStr).GetItems(null).QueryObjects;
+            List<Door> doors = new DoorClient(AppSettings.Current.ConnStr).GetItems(null, true).QueryObjects;
             if (doors != null && doors.Count > 0)
             {
                 doors = (from item in doors

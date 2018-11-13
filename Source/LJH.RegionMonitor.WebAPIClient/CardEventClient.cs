@@ -6,7 +6,7 @@ using LJH.GeneralLibrary.WebAPIClient;
 
 namespace LJH.RegionMonitor.WebAPIClient
 {
-    public class CardEventClient : APIClientBase<int, CardEvent>
+    public class CardEventClient : APIClientBase<string, CardEvent>
     {
         #region 构造函数
         public CardEventClient(string repUri)
