@@ -84,7 +84,28 @@ namespace LJH.OneCard.HKVisionClient
 
         private bool IsPermitted(int eventType)
         {
-            return false;
+            switch (eventType)
+            {
+                case 196881:
+                case 196883:
+                case 196884:
+                case 196885:
+                case 196886:
+                case 196887:
+                case 196888:
+                case 196889:
+                case 196890:
+                case 196891:
+                case 196892:
+                case 196893:
+                case 197128:
+                case 197162:
+                case 198914:
+                case 198915:
+                    return true;
+                default:
+                    return false;
+            }
         }
         #endregion
 
@@ -140,7 +161,7 @@ namespace LJH.OneCard.HKVisionClient
                     events = items.List.Where(it => IsPermitted(it.EventType)).Select(it => new CardEvent()
                     {
                         ID = it.EventUuid,
-                        CardID = it.CardNo,
+                        UserID = it.PersonId.ToString(),
                         UserName = it.PersonName,
                         Department = it.DeptName,
                         DoorID = it.DoorID,

@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace LJH.OneCard.HKVisionClient
 {
-    public class HKVisionResponseBase
+    internal class HKVisionResponseBase
     {
         [JsonProperty("errorCode")]
         public int ErrorCode { get; set; }
@@ -17,7 +17,7 @@ namespace LJH.OneCard.HKVisionClient
         public string Data { get; set; }
     }
 
-    public class HKVisionListData<T>
+    internal class HKVisionListData<T>
     {
         [JsonProperty("total")]
         public int Total { get; set; }
@@ -29,7 +29,7 @@ namespace LJH.OneCard.HKVisionClient
         public List<T> List { get; set; }
     }
 
-    public class HKVisionDoor
+    internal class HKVisionDoor
     {
         [JsonProperty("doorUuid")]
         public string DoorID { get; set; }
@@ -39,25 +39,27 @@ namespace LJH.OneCard.HKVisionClient
         public string DeviceName { get; set; }
     }
 
-    public class HKVisionCardEvent
+    internal class HKVisionCardEvent
     {
         [JsonProperty("doorUuid")]
         public string DoorID { get; set; }
         [JsonProperty("doorName")]
         public string DoorName { get; set; }
+        [JsonProperty("eventUuid")]
         public string EventUuid { get; set; }
+        [JsonProperty("eventType")]
         public int EventType { get; set; }
-
+        [JsonProperty("eventTime")]
         public long EventTime { get; set; }
-
+        [JsonProperty("eventName")]
         public string EventName { get; set; }
-
-        public string CardNo { get; set; }
-
+        [JsonProperty("personId")]
+        public int PersonId { get; set; }
+        [JsonProperty("personName")]
         public string PersonName { get; set; }
-
+        [JsonProperty("personName")]
         public string DeptName { get; set; }
-
+        [JsonProperty("picUrl")]
         public string PicUrl { get; set; }
     }
 }

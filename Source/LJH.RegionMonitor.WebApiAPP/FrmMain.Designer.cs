@@ -37,6 +37,8 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnCardEvent = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.btn区域进出实时统计 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -68,7 +70,9 @@
             this.btnRegion,
             this.toolStripSeparator1,
             this.btnCardEvent,
-            this.toolStripSeparator2});
+            this.toolStripSeparator2,
+            this.btn区域进出实时统计,
+            this.toolStripSeparator3});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(744, 25);
@@ -105,6 +109,21 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
+            // btn区域进出实时统计
+            // 
+            this.btn区域进出实时统计.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.btn区域进出实时统计.Image = ((System.Drawing.Image)(resources.GetObject("btn区域进出实时统计.Image")));
+            this.btn区域进出实时统计.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btn区域进出实时统计.Name = "btn区域进出实时统计";
+            this.btn区域进出实时统计.Size = new System.Drawing.Size(108, 22);
+            this.btn区域进出实时统计.Text = "区域进出实时统计";
+            this.btn区域进出实时统计.Click += new System.EventHandler(this.btn区域进出实时统计_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -139,6 +158,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnCardEvent;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton btn区域进出实时统计;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
     }
 }
 

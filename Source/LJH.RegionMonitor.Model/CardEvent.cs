@@ -20,7 +20,7 @@ namespace LJH.RegionMonitor.Model
         /// <summary>
         /// 获取或设置卡号
         /// </summary>
-        public string CardID { get; set; }
+        public string UserID { get; set; }
         /// <summary>
         /// 获取或设置持卡人姓名，系统不能识别的卡刷卡时持卡人姓名为空
         /// </summary>

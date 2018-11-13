@@ -41,7 +41,7 @@ namespace LJH.RegionMonitor.WebApiAPP
         {
             var record = item as CardEvent;
             row.Tag = record;
-            row.Cells["colCardID"].Value = record.CardID;
+            row.Cells["colCardID"].Value = record.UserID;
             row.Cells["colUserName"].Value = record.UserName;
             row.Cells["colDoorName"].Value = record.DoorName;
             row.Cells["colDepartment"].Value = record.Department;

@@ -99,11 +99,29 @@
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmMonitor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmMonitor.designer.cs">
+      <DependentUpon>FrmMonitor.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmMonitorSetting.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FrmMonitorSetting.designer.cs">
       <DependentUpon>FrmMonitorSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmUserDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmUserDetail.designer.cs">
+      <DependentUpon>FrmUserDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmUserView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmUserView.designer.cs">
+      <DependentUpon>FrmUserView.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -119,6 +137,36 @@
     <Compile Include="UserControls\UCDateTimeInterval.designer.cs">
       <DependentUpon>UCDateTimeInterval.cs</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UCDepartment.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCDepartment.designer.cs">
+      <DependentUpon>UCDepartment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCDeptListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCDeptListView.designer.cs">
+      <DependentUpon>UCDeptListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCUser.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCUser.designer.cs">
+      <DependentUpon>UCUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCUserDetail.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCUserDetail.designer.cs">
+      <DependentUpon>UCUserDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\UCUserListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControls\UCUserListView.designer.cs">
+      <DependentUpon>UCUserListView.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="FrmDoorSelection.resx">
       <DependentUpon>FrmDoorSelection.cs</DependentUpon>
     </EmbeddedResource>
@@ -128,8 +176,17 @@
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FrmMonitor.resx">
+      <DependentUpon>FrmMonitor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FrmMonitorSetting.resx">
       <DependentUpon>FrmMonitorSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmUserDetail.resx">
+      <DependentUpon>FrmUserDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmUserView.resx">
+      <DependentUpon>FrmUserView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -146,6 +203,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\UCDateTimeInterval.resx">
       <DependentUpon>UCDateTimeInterval.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UCDepartment.resx">
+      <DependentUpon>UCDepartment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UCUser.resx">
+      <DependentUpon>UCUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UCUserDetail.resx">
+      <DependentUpon>UCUserDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControls\UCUserListView.resx">
+      <DependentUpon>UCUserListView.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
