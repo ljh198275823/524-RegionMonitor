@@ -28,7 +28,7 @@ namespace LJH.RegionMonitor.WebApiAPP
                 foreach (var p in InregionPerson)
                 {
                     int row = dataGridView1.Rows.Add();
-                    dataGridView1.Rows[row].Cells["colCardID"].Value = p.CardID;
+                    dataGridView1.Rows[row].Cells["colCardID"].Value = p.UserID;
                     dataGridView1.Rows[row].Cells["colUserName"].Value = p.UserName;
                     dataGridView1.Rows[row].Cells["colDepartment"].Value = p.Department;
                     //dataGridView1.Rows[row].Cells["colPhone"].Value = new UserBLL(AppSettings.Current.ConnStr).GetPhone(p.CardID);

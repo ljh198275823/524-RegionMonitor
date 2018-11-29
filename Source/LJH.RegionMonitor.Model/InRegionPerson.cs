@@ -15,7 +15,7 @@ namespace LJH.RegionMonitor.Model
 
         public InRegionPerson(CardEvent ce)
         {
-            CardID = ce.UserID;
+            UserID = ce.UserID;
             UserName = ce.UserName;
             Department = ce.Department;
             PhotoPath = ce.Photo;
@@ -26,7 +26,7 @@ namespace LJH.RegionMonitor.Model
         #endregion
 
         #region 公共属性
-        public string CardID { get; set; }
+        public string UserID { get; set; }
 
         public string UserName { get; set; }
 

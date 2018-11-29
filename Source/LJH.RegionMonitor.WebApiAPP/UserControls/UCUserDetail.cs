@@ -21,7 +21,7 @@ namespace LJH.RegionMonitor.WebApiAPP
         public void ShowPeople(InRegionPerson p)
         {
             txtName.Text = p.UserName;
-            txtCardID.Text = p.CardID;
+            txtCardID.Text = p.UserID;
             txtDepartment.Text = p.Department;
             txtDoor.Text = p.DoorName;
             txtEventDT.Text = p.EnterDateTime.ToString("yyyy-MM-dd HH:mm:ss");
