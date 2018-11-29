@@ -37,7 +37,7 @@ namespace LJH.RegionMonitor.WebAPI
                 var s = JsonConvert.DeserializeObject<SearchConditionWrap>(temp);
                 if (!string.IsNullOrEmpty(s.SearchType))
                 {
-                    var t = TypeHelper.GetTypeOfName("HH.CRM.Model", s.SearchType);
+                    var t = TypeHelper.GetTypeOfName("LJH.RegionMonitor.Model", s.SearchType);
                     if (t != null)
                     {
                         con = JsonConvert.DeserializeObject(s.Search, t) as SearchCondition;

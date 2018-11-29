@@ -147,7 +147,7 @@ namespace LJH.OneCard.HKVisionClient
                 opUserUuid = OP_USER_UUID,
                 time = GetMilliSeconds(DateTime.Now),
                 pageNo = 1,
-                pageSize = 200,
+                pageSize = 10000,
                 startTime = GetMilliSeconds(begin),
                 endTime = GetMilliSeconds(end)
             };

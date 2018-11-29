@@ -128,9 +128,9 @@ namespace LJH.RegionMonitor.WebApiAPP
         private void FrmMain_Load(object sender, EventArgs e)
         {
             this.Text += string.Format(" [{0}]", Application.ProductVersion);
-            lblUrl.Text = _URL;
             StartWebHost();
             AppSettings.Current.ConnStr = @"http://localhost:13002/rm/api";
+            lblUrl.Text = AppSettings.Current.ConnStr;
         }
 
         private void FrmMain_FormClosing(object sender, FormClosingEventArgs e)

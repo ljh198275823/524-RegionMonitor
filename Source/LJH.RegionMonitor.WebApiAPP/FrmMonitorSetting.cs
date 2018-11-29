@@ -64,16 +64,16 @@ namespace LJH.RegionMonitor.WebApiAPP
                 MessageBox.Show("区域名称不能为空");
                 return false;
             }
-            if (viewEntrance.Rows.Count == 0)
-            {
-                MessageBox.Show("请至少设置一个入口门禁点");
-                return false;
-            }
-            if (viewExit.Rows.Count == 0)
-            {
-                MessageBox.Show("请至少设置一个出口门禁点");
-                return false;
-            }
+            //if (viewEntrance.Rows.Count == 0)
+            //{
+            //    MessageBox.Show("请至少设置一个入口门禁点");
+            //    return false;
+            //}
+            //if (viewExit.Rows.Count == 0)
+            //{
+            //    MessageBox.Show("请至少设置一个出口门禁点");
+            //    return false;
+            //}
             return true;
         }
         #endregion

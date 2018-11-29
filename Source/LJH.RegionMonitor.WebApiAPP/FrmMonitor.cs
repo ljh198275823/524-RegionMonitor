@@ -27,11 +27,7 @@ namespace LJH.RegionMonitor.WebApiAPP
 
         private MonitorRegion _CurrentRegion = null;
         private Thread _ReadCardEventThread = null;
-
-        private bool _First = false;
-        private CardEvent _LastEvent = null;
-        private DateTime _LastDateTime = DateTime.Now.AddDays(-3);
-        private int _Days = -3; //从某个时间点的刷卡记录开始算起,一般来说人员不会在区域里面呆超过三天
+        private DateTime _LastDateTime = DateTime.Now.AddDays(-3);  //从某个时间点的刷卡记录开始算起,一般来说人员不会在区域里面呆超过三天
         #endregion
 
         #region 私有方法
@@ -47,8 +43,6 @@ namespace LJH.RegionMonitor.WebApiAPP
             _CurrentRegion = new MonitorRegion(region);
             lblRegion.Text = string.Format("{0} 在场人数", _CurrentRegion.Name);
             lblRegion.ForeColor = Color.Black;
-            _First = true;
-
 
             if (_ReadCardEventThread == null)
             {
@@ -62,22 +56,21 @@ namespace LJH.RegionMonitor.WebApiAPP
 
         private void FreshRegion_Thread()
         {
-            //while (true)
-            //{
-            //    Thread.Sleep(1000);
-            //    if (_CurrentRegion == null) continue;
-            //    List<CardEvent> events = new CardEventBLL(AppSettings.Current.ConnStr).GetEvents(_LastLogID, DateTime.Now.AddDays(_Days));
-            //    if (events != null && events.Count > 0)
-            //    {
-            //        foreach (var item in events)
-            //        {
-            //            _CurrentRegion.HandleCardEvent(item);
-            //        }
-            //        if (!_First) _LastEvent = events.LastOrDefault(it => it.InorOut == 1 || it.InorOut == 2);   // events.LastOrDefault(it => _CurrentRegion.IsMyDoor(it.DoorID));
-            //        _LastLogID = events.Max(it => it.ID) + 1;
-            //    }
-            //    _First = false;
-            //}
+            while (true)
+            {
+                Thread.Sleep(1000);
+                if (_CurrentRegion == null) continue;
+                var con = new CardEventSearchCondition() { EventTime = new DateTimeRange() { Begin = _LastDateTime, End = DateTime.Now } };
+                List<CardEvent> events = new CardEventClient(AppSettings.Current.ConnStr).GetItems(con, true).QueryObjects;
+                if (events != null && events.Count > 0)
+                {
+                    foreach (var item in events)
+                    {
+                        _CurrentRegion.HandleCardEvent(item);
+                    }
+                    _LastDateTime = events.Max(it => it.EventTime);
+                }
+            }
         }
         #endregion
 
