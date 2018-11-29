@@ -22,7 +22,7 @@ namespace LJH.RegionMonitor.WebApiAPP
 
         #region 私有变量
         private string _URL = @"http://+:13002/rm/";
-        private SoftDogInfo _SoftDog;
+        //private SoftDogInfo _SoftDog;
         private DateTime _ExpireDate = new DateTime(2020, 12, 31);
         #endregion
 
