@@ -100,10 +100,10 @@ namespace LJH.RegionMonitor.Android
             {
                 var item = _Depts.ElementAt(position);
                 lblDept.Text = $"{item.Key}({item.Value.Count }人)";
-                
-                //lblUser.LayoutParameters.Height = 300;
                 lblUser.Adapter = new InregionPersonGridViewAdapter(_Context, item.Value);
                 var columns = lblUser.NumColumns;
+                var width = lblUser.Width;
+                lblUser.LayoutParameters.Height = 300;
             }
             return convertView;
         }
