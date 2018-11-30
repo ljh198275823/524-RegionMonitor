@@ -35,9 +35,14 @@ namespace LJH.RegionMonitor.WebAPI.Controllers
             return new QueryResult<Door>(ret.Result, ret.Message, item);
         }
 
+        //protected override QueryResultList<Door> GetingItems(SearchCondition search)
+        //{
+        //    return _Client.GetDoors();
+        //}
+
         protected override QueryResultList<Door> GetingItems(SearchCondition search)
         {
-            return _Client.GetDoors();
+            return MockAcsProvider.GetDoors();
         }
         #endregion
     }

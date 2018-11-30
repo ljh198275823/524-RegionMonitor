@@ -33,7 +33,7 @@ namespace LJH.RegionMonitor.WebApiAPP
         #region 私有方法
         private void InitCurrentRegion()
         {
-            var region = new RegionClient(AppSettings.Current.ConnStr).GetByID(1, false).QueryObject;
+            var region = new RegionClient(AppSettings.Current.ConnStr).GetByID(1,true).QueryObject;
             if (region == null) //获取失败再根据设置的当前区域从数据库获取
             {
                 lblRegion.Text = "没有设置当前区域";
@@ -58,17 +58,28 @@ namespace LJH.RegionMonitor.WebApiAPP
         {
             while (true)
             {
-                Thread.Sleep(1000);
-                if (_CurrentRegion == null) continue;
-                var con = new CardEventSearchCondition() { EventTime = new DateTimeRange() { Begin = _LastDateTime, End = DateTime.Now } };
-                List<CardEvent> events = new CardEventClient(AppSettings.Current.ConnStr).GetItems(con, true).QueryObjects;
-                if (events != null && events.Count > 0)
+                try
                 {
-                    foreach (var item in events)
+                    Thread.Sleep(1000);
+                    if (_CurrentRegion == null) continue;
+                    var con = new CardEventSearchCondition() { EventTime = new DateTimeRange() { Begin = _LastDateTime, End = DateTime.Now } };
+                    List<CardEvent> events = new CardEventClient(AppSettings.Current.ConnStr).GetItems(con, true).QueryObjects;
+                    if (events != null && events.Count > 0)
                     {
-                        _CurrentRegion.HandleCardEvent(item);
+                        foreach (var item in events)
+                        {
+                            _CurrentRegion.HandleCardEvent(item);
+                        }
+                        _LastDateTime = events.Max(it => it.EventTime);
                     }
-                    _LastDateTime = events.Max(it => it.EventTime);
+                }
+                catch (ThreadAbortException)
+                {
+                    break;
+                }
+                catch (Exception)
+                {
+
                 }
             }
         }
@@ -154,6 +165,8 @@ namespace LJH.RegionMonitor.WebApiAPP
 
         private void FrmMonitor_FormClosed(object sender, FormClosedEventArgs e)
         {
+            if (tmrGetEvents.Enabled) tmrGetEvents.Enabled = false;
+            if (tmrTimeout.Enabled) tmrTimeout.Enabled = false;
             if (_ReadCardEventThread != null)
             {
                 _ReadCardEventThread.Abort();

@@ -32,12 +32,22 @@ namespace LJH.RegionMonitor.WebAPI.Controllers
             return new QueryResult<CardEvent>(ResultCode.Fail, "没有实现按事件ID查询刷卡记录的功能", null);
         }
 
+        //protected override QueryResultList<CardEvent> GetingItems(SearchCondition search)
+        //{
+        //    if (search is CardEventSearchCondition)
+        //    {
+        //        var con = search as CardEventSearchCondition;
+        //        return _Client.GetCardEvents(con.EventTime.Begin, con.EventTime.End);
+        //    }
+        //    return new QueryResultList<CardEvent>(ResultCode.Fail, "没有指定刷卡记录查询条件", null);
+        //}
+
         protected override QueryResultList<CardEvent> GetingItems(SearchCondition search)
         {
             if (search is CardEventSearchCondition)
             {
                 var con = search as CardEventSearchCondition;
-                return _Client.GetCardEvents(con.EventTime.Begin, con.EventTime.End);
+                return MockAcsProvider.GetCardEvents(con);
             }
             return new QueryResultList<CardEvent>(ResultCode.Fail, "没有指定刷卡记录查询条件", null);
         }

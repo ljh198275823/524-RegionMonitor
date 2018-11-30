@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+  <TextView
+    android:id="@+id/lblDept"
+    android:layout_width="300dp"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="#aaaa00"
+    android:textSize="36dp"
+    android:textColor="#ffffff"
+    >
+  </TextView>
+  <GridView 
+    android:id="@+id/userGridview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:columnWidth="150dp"
+    android:padding="10dp"
+    android:numColumns="auto_fit"
+    android:verticalSpacing="10dp"
+    android:horizontalSpacing="10dp"
+    android:stretchMode="none"
+    android:scrollbars="none"
+    >
+  </GridView>
+</LinearLayout>
