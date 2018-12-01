@@ -9,6 +9,6 @@
   android:layout_height="match_parent"
   android:gravity="center"
   android:background="#008080"
-  android:textSize="36dp">
+  android:textSize="24dp">
   </TextView>
 </FrameLayout>

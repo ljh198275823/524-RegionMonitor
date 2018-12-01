@@ -92,7 +92,7 @@ namespace LJH.RegionMonitor.Android
         {
             if (this.ActionBar != null)
             {
-                this.ActionBar.Title = _CurrentRegion != null ? $"{ _CurrentRegion.Name} 人数 {_CurrentRegion.InregionUsers.Count }" : "没有设置区域";
+                this.ActionBar.Title = _CurrentRegion != null ? $"{ _CurrentRegion.Name}    在场总人数 {_CurrentRegion.InregionUsers.Count }" : "没有设置区域";
             }
             (_RegionView.Adapter as RegionMonitorAdapter).NotifyDataSetChanged();
         }

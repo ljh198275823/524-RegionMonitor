@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="InregionPersonGridViewAdapter.cs" />
+    <Compile Include="JavaTag.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="RegionMonitorAdapter.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />

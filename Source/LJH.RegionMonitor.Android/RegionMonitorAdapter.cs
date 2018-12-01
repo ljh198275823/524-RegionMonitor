@@ -8,6 +8,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Android.Util;
 using Java.Lang;
 using LJH.RegionMonitor.Model;
 
@@ -21,6 +22,7 @@ namespace LJH.RegionMonitor.Android
             _Context = context;
             _CurrentRegion = mr;
             GetInregionPerson();
+            _GridviewItemHeight = DP2PX(context, 50);
         }
         #endregion
 
@@ -28,6 +30,7 @@ namespace LJH.RegionMonitor.Android
         private Context _Context = null;
         private MonitorRegion _CurrentRegion = null;
         private Dictionary<string, List<InRegionPerson>> _Depts = new Dictionary<string, List<InRegionPerson>>();
+        private int _GridviewItemHeight = 0;  //刷卡人员信息显示高度
         #endregion
 
         #region 私有方法
@@ -45,15 +48,10 @@ namespace LJH.RegionMonitor.Android
             }
         }
 
-        private void SetGridHeight(GridView gv)
+        private int DP2PX(Context context, int dp)
         {
-            int totalHeight = 0;
-            int columns = gv.NumColumns;
-            for (int i = 0; i < gv.Adapter.Count; i += columns)
-            {
-                var view = gv.Adapter.GetView(i, null, gv);
-
-            }
+            var scale = context.Resources.DisplayMetrics.Density;
+            return (int)(System.Math.Ceiling(dp * scale));
         }
         #endregion
 
@@ -95,17 +93,28 @@ namespace LJH.RegionMonitor.Android
                 convertView = LayoutInflater.From(_Context).Inflate(Resource.Layout.InregionDeptView, null);
             }
             var lblDept = convertView.FindViewById<TextView>(Resource.Id.lblDept);
-            var lblUser = convertView.FindViewById<GridView>(Resource.Id.userGridview);
+            var lblCount = convertView.FindViewById<TextView>(Resource.Id.lblCount);
+            var gvUser = convertView.FindViewById<GridView>(Resource.Id.userGridview);
+            gvUser.ItemClick -= LblUser_ItemClick;
+            gvUser.ItemClick += LblUser_ItemClick;
             if (_Depts.Count > position)
             {
                 var item = _Depts.ElementAt(position);
-                lblDept.Text = $"{item.Key}({item.Value.Count }人)";
-                lblUser.Adapter = new InregionPersonGridViewAdapter(_Context, item.Value);
-                var columns = lblUser.NumColumns;
-                var width = lblUser.Width;
-                lblUser.LayoutParameters.Height = 300;
+                lblDept.Text = $"{item.Key}";
+                lblCount.Text = item.Value.Count.ToString();
+                gvUser.Adapter = new InregionPersonGridViewAdapter(_Context, item.Value, _GridviewItemHeight);
+                var columns = gvUser.NumColumns;
+                var rows = (int)(System.Math.Ceiling((decimal)item.Value.Count / columns));
+                gvUser.LayoutParameters.Height = gvUser.PaddingTop + (_GridviewItemHeight + gvUser.VerticalSpacing) * rows;
             }
             return convertView;
+        }
+
+        private void LblUser_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        {
+            var v = e.View;
+            var tag = e.View.Tag as JavaTag<InRegionPerson>;
+            Log.Debug("abd", $"姓名={tag.Value.UserName} 部门={tag.Value.Department } 入场地点={tag.Value.DoorName } 入场时间={tag.Value.EnterDateTime.ToString("yyyy-MM-dd HH:mm:ss")}");
         }
         #endregion
     }

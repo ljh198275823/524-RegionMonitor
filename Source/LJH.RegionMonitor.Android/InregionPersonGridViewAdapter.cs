@@ -6,6 +6,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Graphics;
 using Android.Views;
 using Android.Widget;
 using LJH.RegionMonitor.Model;
@@ -15,16 +16,18 @@ namespace LJH.RegionMonitor.Android
     public class InregionPersonGridViewAdapter : BaseAdapter
     {
         #region 构造函数
-        public InregionPersonGridViewAdapter(Context context, List<InRegionPerson> items) : base()
+        public InregionPersonGridViewAdapter(Context context, List<InRegionPerson> items,int itemHeight) : base()
         {
             _Context = context;
             _Users = items;
+            _ItemHeight = itemHeight;
         }
         #endregion
 
         #region 私有变量
         private Context _Context = null;
         private List<InRegionPerson> _Users = null;
+        private int _ItemHeight = 0;
         #endregion
 
         #region 私有方法
@@ -59,7 +62,11 @@ namespace LJH.RegionMonitor.Android
             if (_Users.Count > position)
             {
                 var item = _Users[position];
+                lblUser.LayoutParameters.Height = _ItemHeight;
                 lblUser.Text = item.UserName;
+                convertView.Tag = new JavaTag<InRegionPerson>(item);
+                if (item.IsTimeout) lblUser.SetTextColor(Color.Red);
+                else lblUser.SetTextColor(Color.White);
             }
             return convertView;
         }
