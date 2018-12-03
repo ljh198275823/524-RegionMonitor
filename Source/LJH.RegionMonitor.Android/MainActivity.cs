@@ -22,7 +22,7 @@ namespace LJH.RegionMonitor.Android
         private readonly string _Url = @"http://47.92.81.39:13002/rm/api";
         private MonitorRegion _CurrentRegion = null;
         private Thread _ReadCardEventThread = null;
-        private DateTime _LastDateTime = DateTime.Now.AddDays(-3);  //从某个时间点的刷卡记录开始算起,一般来说人员不会在区域里面呆超过三天
+        private DateTime _LastDateTime = DateTime.MinValue;  
         private ListView _RegionView = null;
         #endregion
 
@@ -35,22 +35,13 @@ namespace LJH.RegionMonitor.Android
             {
                 this.ActionBar.Title = _CurrentRegion != null ? _CurrentRegion.Name : "没有设置区域";
             }
-
             if (_CurrentRegion != null)
             {
-                if (_ReadCardEventThread == null)
-                {
-                    _ReadCardEventThread = new Thread(new ThreadStart(FreshRegion_Thread));
-                    _ReadCardEventThread.IsBackground = true;
-                    _ReadCardEventThread.Start();
-                }
-
+                _LastDateTime = DateTime.Now.AddDays(-3);  //从某个时间点的刷卡记录开始算起,一般来说人员不会在区域里面呆超过三天
                 if (_RegionView.Adapter == null)
                 {
                     _RegionView.Adapter = new RegionMonitorAdapter(this, _CurrentRegion);
                 }
-                //tmrGetEvents.Enabled = _CurrentRegion != null;
-                //tmrTimeout.Enabled = _CurrentRegion != null;
             }
         }
 
@@ -72,7 +63,7 @@ namespace LJH.RegionMonitor.Android
                         }
                         _LastDateTime = events.Max(it => it.EventTime);
                     }
-                    if(_CurrentRegion.InregionUsersChanged)
+                    if (_CurrentRegion.InregionUsersChanged)
                     {
                         this.RunOnUiThread(() => FreshRegion());
                     }
@@ -102,12 +93,35 @@ namespace LJH.RegionMonitor.Android
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
             _RegionView = FindViewById<ListView>(Resource.Id.lvRegion);
 
-            InitCurrentRegion();
+            InitCurrentRegion(); //初始化当前区域
+        }
+
+        protected override void OnResume()
+        {
+            if (_CurrentRegion != null)
+            {
+                if (_ReadCardEventThread == null)
+                {
+                    _ReadCardEventThread = new Thread(new ThreadStart(FreshRegion_Thread));
+                    _ReadCardEventThread.IsBackground = true;
+                    _ReadCardEventThread.Start();
+                }
+            }
+            base.OnResume();
+        }
+
+        protected override void OnPause()
+        {
+            if (_ReadCardEventThread != null)
+            {
+                _ReadCardEventThread.Abort();
+                _ReadCardEventThread = null;
+            }
+            base.OnPause();
         }
 
         protected override void OnDestroy()
