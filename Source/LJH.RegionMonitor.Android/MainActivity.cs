@@ -19,7 +19,8 @@ namespace LJH.RegionMonitor.Android
     {
         #region 私有变量
         //private readonly string _LogName = "MainActivity";
-        private readonly string _Url = @"http://47.92.81.39:13002/rm/api";
+        private readonly string _Url = @"http://192.168.2.116:13002/rm/api";  
+        //private readonly string _Url = @"http://47.92.81.39:13002/rm/api";
         private MonitorRegion _CurrentRegion = null;
         private Thread _ReadCardEventThread = null;
         private DateTime _LastDateTime = DateTime.MinValue;  
@@ -57,11 +58,12 @@ namespace LJH.RegionMonitor.Android
                     List<CardEvent> events = new CardEventClient(_Url).GetItems(con, true).QueryObjects;
                     if (events != null && events.Count > 0)
                     {
+                        events = (from it in events orderby it.EventTime ascending select it).ToList();
                         foreach (var item in events)
                         {
                             _CurrentRegion.HandleCardEvent(item);
                         }
-                        _LastDateTime = events.Max(it => it.EventTime);
+                        _LastDateTime = events.Max(it => it.EventTime).AddSeconds(10);
                     }
                     if (_CurrentRegion.InregionUsersChanged)
                     {
@@ -93,7 +95,6 @@ namespace LJH.RegionMonitor.Android
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
             _RegionView = FindViewById<ListView>(Resource.Id.lvRegion);
 

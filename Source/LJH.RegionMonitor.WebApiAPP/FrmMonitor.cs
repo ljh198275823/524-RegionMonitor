@@ -66,6 +66,7 @@ namespace LJH.RegionMonitor.WebApiAPP
                     List<CardEvent> events = new CardEventClient(AppSettings.Current.ConnStr).GetItems(con, true).QueryObjects;
                     if (events != null && events.Count > 0)
                     {
+                        events = (from it in events orderby it.EventTime ascending select it).ToList();
                         foreach (var item in events)
                         {
                             _CurrentRegion.HandleCardEvent(item);

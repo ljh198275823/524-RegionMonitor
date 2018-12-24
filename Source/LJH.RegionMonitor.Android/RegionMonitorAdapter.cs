@@ -37,9 +37,9 @@ namespace LJH.RegionMonitor.Android
         private void GetInregionPerson()
         {
             var items = _CurrentRegion.InregionUsers;
+            _Depts.Clear();
             if (items != null && items.Count > 0)
             {
-                _Depts.Clear();
                 foreach (var item in items.OrderBy(it => it.Department))
                 {
                     if (!_Depts.ContainsKey(item.Department)) _Depts.Add(item.Department, new List<InRegionPerson>());

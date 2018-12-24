@@ -80,8 +80,11 @@ namespace LJH.RegionMonitor.Model
                 }
                 else
                 {
-                    _Person[item.UserID].EnterDateTime = item.EventTime;
-                    _PersonChanged = true;
+                    if (_Person[item.UserID].EnterDateTime < item.EventTime) //要判断一下本次刷卡时间是否大于人员入场时间
+                    {
+                        _Person[item.UserID].EnterDateTime = item.EventTime;
+                        _PersonChanged = true;
+                    }
                 }
             }
         }
@@ -92,8 +95,11 @@ namespace LJH.RegionMonitor.Model
             {
                 if (_Person.ContainsKey(item.UserID))
                 {
-                    _Person.Remove(item.UserID);
-                    _PersonChanged = true;
+                    if (_Person[item.UserID].EnterDateTime < item.EventTime) //要判断一下本次刷卡时间是否大于人员入场时间
+                    {
+                        _Person.Remove(item.UserID);
+                        _PersonChanged = true;
+                    }
                 }
             }
         }
