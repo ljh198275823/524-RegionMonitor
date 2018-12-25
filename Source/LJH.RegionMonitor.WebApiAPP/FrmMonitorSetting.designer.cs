@@ -51,10 +51,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
-            this.colIDExit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNameExit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colIDEnter = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colNameEnter = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colIDExit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNameExit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.viewEntrance)).BeginInit();
             this.menuEntrance.SuspendLayout();
@@ -277,31 +277,14 @@
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
-            // colIDExit
-            // 
-            this.colIDExit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colIDExit.HeaderText = "编号";
-            this.colIDExit.MinimumWidth = 80;
-            this.colIDExit.Name = "colIDExit";
-            this.colIDExit.ReadOnly = true;
-            this.colIDExit.Width = 80;
-            // 
-            // colNameExit
-            // 
-            this.colNameExit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colNameExit.HeaderText = "名称";
-            this.colNameExit.MinimumWidth = 100;
-            this.colNameExit.Name = "colNameExit";
-            this.colNameExit.ReadOnly = true;
-            // 
             // colIDEnter
             // 
             this.colIDEnter.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.colIDEnter.HeaderText = "编号";
-            this.colIDEnter.MinimumWidth = 80;
+            this.colIDEnter.MinimumWidth = 200;
             this.colIDEnter.Name = "colIDEnter";
             this.colIDEnter.ReadOnly = true;
-            this.colIDEnter.Width = 80;
+            this.colIDEnter.Width = 200;
             // 
             // colNameEnter
             // 
@@ -310,6 +293,23 @@
             this.colNameEnter.MinimumWidth = 100;
             this.colNameEnter.Name = "colNameEnter";
             this.colNameEnter.ReadOnly = true;
+            // 
+            // colIDExit
+            // 
+            this.colIDExit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colIDExit.HeaderText = "编号";
+            this.colIDExit.MinimumWidth = 200;
+            this.colIDExit.Name = "colIDExit";
+            this.colIDExit.ReadOnly = true;
+            this.colIDExit.Width = 200;
+            // 
+            // colNameExit
+            // 
+            this.colNameExit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colNameExit.HeaderText = "名称";
+            this.colNameExit.MinimumWidth = 100;
+            this.colNameExit.Name = "colNameExit";
+            this.colNameExit.ReadOnly = true;
             // 
             // FrmMonitorSetting
             // 

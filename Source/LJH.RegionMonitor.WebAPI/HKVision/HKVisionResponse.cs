@@ -5,16 +5,16 @@ using Newtonsoft.Json;
 
 namespace LJH.OneCard.HKVisionClient
 {
-    internal class HKVisionResponseBase
+    internal class HKVisionListResponse<T>
     {
-        [JsonProperty("errorCode")]
-        public int ErrorCode { get; set; }
+        [JsonProperty("code")]
+        public int Code { get; set; }
 
-        [JsonProperty("errorMessage")]
-        public string ErrorMessage { get; set; }
+        [JsonProperty("message")]
+        public string Msg { get; set; }
 
         [JsonProperty("data")]
-        public string Data { get; set; }
+        public HKVisionListData<T> Data { get; set; }
     }
 
     internal class HKVisionListData<T>
@@ -29,36 +29,72 @@ namespace LJH.OneCard.HKVisionClient
         public List<T> List { get; set; }
     }
 
+    internal class HKVisionDept
+    {
+        [JsonProperty("orgIndexCode")]
+        public string ID { get; set; }
+        [JsonProperty("orgName")]
+        public string Name { get; set; }
+    }
+
+    internal class HKVisionPerson
+    {
+        [JsonProperty("personId")]
+        public string ID { get; set; }
+        [JsonProperty("personName")]
+        public string Name { get; set; }
+        [JsonProperty("orgName")]
+        public string Department { get; set; }
+        [JsonProperty("phoneNo")]
+        public string Phone { get; set; }
+        [JsonProperty("gender")]
+        public string Gender { get; set; }
+        [JsonProperty("certificateNo")]
+        public string Certificate { get; set; }
+        [JsonProperty("personPhoto")]
+        public PhotoInfo PhotoInfo { get; set; }
+    }
+
+    internal class PhotoInfo
+    {
+        [JsonProperty("picUri")]
+        public string PicUri { get; set; }
+        [JsonProperty("serverIndexCode")]
+        public string ServerIndexCode { get; set; }
+    }
+
     internal class HKVisionDoor
     {
-        [JsonProperty("doorUuid")]
-        public string DoorID { get; set; }
+        [JsonProperty("doorIndexCode")]
+        public string ID { get; set; }
         [JsonProperty("doorName")]
-        public string DoorName { get; set; }
-        [JsonProperty("deviceName")]
-        public string DeviceName { get; set; }
+        public string Name { get; set; }
+        [JsonProperty("acsDevIndexCode")]
+        public string DeviceCode { get; set; }
     }
 
     internal class HKVisionCardEvent
     {
-        [JsonProperty("doorUuid")]
+        [JsonProperty("eventId")]
+        public string EventUuid { get; set; }
+        [JsonProperty("doorIndexCode")]
         public string DoorID { get; set; }
         [JsonProperty("doorName")]
         public string DoorName { get; set; }
-        [JsonProperty("eventUuid")]
-        public string EventUuid { get; set; }
         [JsonProperty("eventType")]
         public int EventType { get; set; }
         [JsonProperty("eventTime")]
-        public long EventTime { get; set; }
+        public DateTime EventTime { get; set; }
         [JsonProperty("eventName")]
         public string EventName { get; set; }
         [JsonProperty("personId")]
-        public int PersonId { get; set; }
+        public string PersonId { get; set; }
         [JsonProperty("personName")]
         public string PersonName { get; set; }
-        [JsonProperty("personName")]
+        [JsonProperty("orgIndexCode")]
         public string DeptName { get; set; }
+        [JsonProperty("cardNo")]
+        public string CardNo { get; set; }
         [JsonProperty("picUrl")]
         public string PicUrl { get; set; }
     }

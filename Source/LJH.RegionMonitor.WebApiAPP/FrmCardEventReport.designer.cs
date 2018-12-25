@@ -33,6 +33,7 @@
             this.ucDateTimeInterval1 = new LJH.GeneralLibrary.WinformControl.UCDateTimeInterval();
             this.viewEvent = new System.Windows.Forms.DataGridView();
             this.colEventDateTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colEventType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colCardID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colUserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colDepartment = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -80,6 +81,7 @@
             this.viewEvent.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.viewEvent.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colEventDateTime,
+            this.colEventType,
             this.colCardID,
             this.colUserName,
             this.colDepartment,
@@ -100,6 +102,12 @@
             this.colEventDateTime.Name = "colEventDateTime";
             this.colEventDateTime.ReadOnly = true;
             this.colEventDateTime.Width = 130;
+            // 
+            // colEventType
+            // 
+            this.colEventType.HeaderText = "事件类别";
+            this.colEventType.Name = "colEventType";
+            this.colEventType.ReadOnly = true;
             // 
             // colCardID
             // 
@@ -172,6 +180,7 @@
         private LJH.GeneralLibrary.WinformControl.UCDateTimeInterval ucDateTimeInterval1;
         private System.Windows.Forms.DataGridView viewEvent;
         private System.Windows.Forms.DataGridViewTextBoxColumn colEventDateTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colEventType;
         private System.Windows.Forms.DataGridViewTextBoxColumn colCardID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colUserName;
         private System.Windows.Forms.DataGridViewTextBoxColumn colDepartment;

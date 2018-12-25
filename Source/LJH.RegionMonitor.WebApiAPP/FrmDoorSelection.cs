@@ -66,7 +66,6 @@ namespace LJH.RegionMonitor.WebApiAPP
             row.Cells["colChk"].Value = _SelectedDoors != null && _SelectedDoors.Exists(it => it.ID == ct.ID);
             row.Cells["colID"].Value = ct.ID;
             row.Cells["colName"].Value = ct.Name;
-            row.Cells["colCtrl"].Value = ct.ControlName;
         }
 
 

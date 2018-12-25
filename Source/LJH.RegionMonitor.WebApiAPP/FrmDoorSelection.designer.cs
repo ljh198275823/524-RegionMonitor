@@ -37,7 +37,6 @@
             this.colChk = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.colID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colCtrl = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colMemo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -47,15 +46,14 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToResizeRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.colChk,
             this.colID,
             this.colName,
-            this.colCtrl,
             this.colMemo});
             this.dataGridView1.Location = new System.Drawing.Point(3, 3);
             this.dataGridView1.Name = "dataGridView1";
@@ -126,7 +124,7 @@
             this.colID.HeaderText = "编号";
             this.colID.Name = "colID";
             this.colID.ReadOnly = true;
-            this.colID.Width = 80;
+            this.colID.Width = 250;
             // 
             // colName
             // 
@@ -136,15 +134,6 @@
             this.colName.Name = "colName";
             this.colName.ReadOnly = true;
             this.colName.Width = 200;
-            // 
-            // colCtrl
-            // 
-            this.colCtrl.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.colCtrl.HeaderText = "所属控制器";
-            this.colCtrl.MinimumWidth = 200;
-            this.colCtrl.Name = "colCtrl";
-            this.colCtrl.ReadOnly = true;
-            this.colCtrl.Width = 200;
             // 
             // colMemo
             // 
@@ -184,7 +173,6 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn colChk;
         private System.Windows.Forms.DataGridViewTextBoxColumn colID;
         private System.Windows.Forms.DataGridViewTextBoxColumn colName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colCtrl;
         private System.Windows.Forms.DataGridViewTextBoxColumn colMemo;
     }
 }

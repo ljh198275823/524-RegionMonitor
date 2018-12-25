@@ -30,9 +30,9 @@ namespace LJH.RegionMonitor.Model
         /// </summary>
         public string Department { get; set; }
         /// <summary>
-        /// 获取或设置照片文件名称
+        /// 获取或设置卡号
         /// </summary>
-        public string Photo { get; set; }
+        public string CardID { get; set; }
         /// <summary>
         /// 获取或设置门禁点ID
         /// </summary>
@@ -42,6 +42,10 @@ namespace LJH.RegionMonitor.Model
         /// </summary>
         public string DoorName { get; set; }
         /// <summary>
+        /// 获取或设置事件类型
+        /// </summary>
+        public int EventType { get; set; }
+        /// <summary>
         /// 获取或设置刷卡时间
         /// </summary>
         public DateTime EventTime { get; set; }
@@ -49,6 +53,10 @@ namespace LJH.RegionMonitor.Model
         /// 获取或设置是否是有效事件,否则为无效刷卡事件
         /// </summary>
         public bool Permitted { get; set; }
+        /// <summary>
+        /// 获取或设置照片文件名称
+        /// </summary>
+        public string Photo { get; set; }
         #endregion
     }
 }

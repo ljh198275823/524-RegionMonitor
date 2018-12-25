@@ -17,6 +17,7 @@ namespace LJH.RegionMonitor.Model
         {
             UserID = ce.UserID;
             UserName = ce.UserName;
+            CardID = ce.CardID;
             Department = ce.Department;
             PhotoPath = ce.Photo;
             DoorID = ce.DoorID;
@@ -31,6 +32,8 @@ namespace LJH.RegionMonitor.Model
         public string UserName { get; set; }
 
         public string Department { get; set; }
+
+        public string CardID { get; set; }
 
         public string PhotoPath { get; set; }
 

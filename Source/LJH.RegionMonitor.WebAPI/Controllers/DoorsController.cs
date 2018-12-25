@@ -30,20 +30,20 @@ namespace LJH.RegionMonitor.WebAPI.Controllers
         protected override QueryResult<Door> GetingItemByID(string id)
         {
             Door item = null;
-            var ret = _Client.GetDoors();
+            var ret = _Client.GetDoors(_ILoggerFactory);
             if (ret.QueryObjects != null && ret.QueryObjects.Count > 0) item = ret.QueryObjects.SingleOrDefault(it => it.ID == id);
             return new QueryResult<Door>(ret.Result, ret.Message, item);
         }
 
-        //protected override QueryResultList<Door> GetingItems(SearchCondition search)
-        //{
-        //    return _Client.GetDoors();
-        //}
-
         protected override QueryResultList<Door> GetingItems(SearchCondition search)
         {
-            return MockAcsProvider.GetDoors();
+            return _Client.GetDoors(_ILoggerFactory);
         }
+
+        //protected override QueryResultList<Door> GetingItems(SearchCondition search)
+        //{
+        //    return MockAcsProvider.GetDoors();
+        //}
         #endregion
     }
 }

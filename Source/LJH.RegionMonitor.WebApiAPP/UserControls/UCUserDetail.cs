@@ -21,10 +21,23 @@ namespace LJH.RegionMonitor.WebApiAPP
         public void ShowPeople(InRegionPerson p)
         {
             txtName.Text = p.UserName;
-            txtCardID.Text = p.UserID;
+            txtCardID.Text = p.CardID;
             txtDepartment.Text = p.Department;
             txtDoor.Text = p.DoorName;
             txtEventDT.Text = p.EnterDateTime.ToString("yyyy-MM-dd HH:mm:ss");
+            var person = new WebAPIClient.PersonDetailClient(AppSettings.Current.ConnStr).GetByID(p.UserID).QueryObject;
+            if (person != null)
+            {
+                txtPhone.Text = person.Phone;
+                if (!string.IsNullOrEmpty(person.Photo))
+                {
+                    var bytes = LJH.GeneralLibrary.HexStringConverter.StringToHex(person.Photo);
+                    using (var fs = new MemoryStream(bytes))
+                    {
+                        picPhoto.Image = Image.FromStream(fs);
+                    }
+                }
+            }
             //if (!string.IsNullOrEmpty(AppSettings.Current.PhotoPath) && !string.IsNullOrEmpty(p.PhotoPath))
             //{
             //    string photo = Path.Combine(AppSettings.Current.PhotoPath, p.PhotoPath);
