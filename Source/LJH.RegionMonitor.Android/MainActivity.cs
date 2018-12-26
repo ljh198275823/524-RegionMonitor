@@ -14,7 +14,7 @@ using Newtonsoft.Json;
 
 namespace LJH.RegionMonitor.Android
 {
-    [Activity(Label = "@string/app_name", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "LJHView", MainLauncher = true, Icon = "@drawable/view")]
     public class MainActivity : Activity
     {
         #region 私有变量

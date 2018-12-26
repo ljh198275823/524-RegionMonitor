@@ -45,7 +45,10 @@ namespace LJH.RegionMonitor.Android
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int icon = 2130837504;
+			public const int myicon = 2130837504;
+			
+			// aapt resource value: 0x7f020001
+			public const int view = 2130837505;
 			
 			static Drawable()
 			{
@@ -60,20 +63,20 @@ namespace LJH.RegionMonitor.Android
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050001
-			public const int lblCount = 2131034113;
+			// aapt resource value: 0x7f060001
+			public const int lblCount = 2131099649;
 			
-			// aapt resource value: 0x7f050000
-			public const int lblDept = 2131034112;
+			// aapt resource value: 0x7f060000
+			public const int lblDept = 2131099648;
 			
-			// aapt resource value: 0x7f050003
-			public const int lblUser = 2131034115;
+			// aapt resource value: 0x7f060003
+			public const int lblUser = 2131099651;
 			
-			// aapt resource value: 0x7f050004
-			public const int lvRegion = 2131034116;
+			// aapt resource value: 0x7f060004
+			public const int lvRegion = 2131099652;
 			
-			// aapt resource value: 0x7f050002
-			public const int userGridview = 2131034114;
+			// aapt resource value: 0x7f060002
+			public const int userGridview = 2131099650;
 			
 			static Id()
 			{
@@ -88,14 +91,14 @@ namespace LJH.RegionMonitor.Android
 		public partial class Layout
 		{
 			
-			// aapt resource value: 0x7f030000
-			public const int InregionDeptView = 2130903040;
+			// aapt resource value: 0x7f040000
+			public const int InregionDeptView = 2130968576;
 			
-			// aapt resource value: 0x7f030001
-			public const int InregionPersonView = 2130903041;
+			// aapt resource value: 0x7f040001
+			public const int InregionPersonView = 2130968577;
 			
-			// aapt resource value: 0x7f030002
-			public const int Main = 2130903042;
+			// aapt resource value: 0x7f040002
+			public const int Main = 2130968578;
 			
 			static Layout()
 			{
@@ -107,14 +110,30 @@ namespace LJH.RegionMonitor.Android
 			}
 		}
 		
+		public partial class Mipmap
+		{
+			
+			// aapt resource value: 0x7f030000
+			public const int myicon = 2130903040;
+			
+			static Mipmap()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Mipmap()
+			{
+			}
+		}
+		
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f040000
-			public const int app_name = 2130968576;
+			// aapt resource value: 0x7f050000
+			public const int app_name = 2131034112;
 			
-			// aapt resource value: 0x7f040001
-			public const int app_title = 2130968577;
+			// aapt resource value: 0x7f050001
+			public const int app_title = 2131034113;
 			
 			static String()
 			{

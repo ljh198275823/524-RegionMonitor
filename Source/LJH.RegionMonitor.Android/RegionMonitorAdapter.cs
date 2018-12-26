@@ -51,6 +51,7 @@ namespace LJH.RegionMonitor.Android
         private int DP2PX(Context context, int dp)
         {
             var scale = context.Resources.DisplayMetrics.Density;
+            var dpi = context.Resources.DisplayMetrics.DensityDpi;
             return (int)(System.Math.Ceiling(dp * scale));
         }
         #endregion
@@ -114,7 +115,11 @@ namespace LJH.RegionMonitor.Android
         {
             var v = e.View;
             var tag = e.View.Tag as JavaTag<InRegionPerson>;
-            Log.Debug("abd", $"姓名={tag.Value.UserName} 部门={tag.Value.Department } 入场地点={tag.Value.DoorName } 入场时间={tag.Value.EnterDateTime.ToString("yyyy-MM-dd HH:mm:ss")}");
+            var builder = new AlertDialog.Builder(_Context);
+            builder.SetTitle($"{tag.Value.UserName} 的明细");
+            builder.SetMessage($"姓名={tag.Value.UserName} 部门={tag.Value.Department } 入场地点={tag.Value.DoorName } 入场时间={tag.Value.EnterDateTime.ToString("yyyy-MM-dd HH:mm:ss")}");
+            builder.SetPositiveButton("确定", (EventHandler<DialogClickEventArgs>)null);
+            builder.Show();
         }
         #endregion
     }
