@@ -25,7 +25,7 @@ namespace LJH.RegionMonitor.WebApiAPP
             txtDepartment.Text = p.Department;
             txtDoor.Text = p.DoorName;
             txtEventDT.Text = p.EnterDateTime.ToString("yyyy-MM-dd HH:mm:ss");
-            var person = new WebAPIClient.PersonDetailClient(AppSettings.Current.ConnStr).GetByID(p.UserID).QueryObject;
+            var person = new WebAPIClient.PersonDetailClient(AppSettings.Current.ConnStr).GetByID(p.UserID, true).QueryObject;
             if (person != null)
             {
                 txtPhone.Text = person.Phone;

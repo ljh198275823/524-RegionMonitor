@@ -225,7 +225,7 @@ namespace LJH.OneCard.HKVisionClient
                     picUri = ph.PicUri,
                     serverIndexCode = ph.ServerIndexCode
                 });
-                using (var client = new WebClient())
+                using (var client = new HKVisionWebClient())
                 {
                     var dics = new Dictionary<string, string>();
                     dics.Add("Content-Type", "application/json;charset=utf-8;");
@@ -240,7 +240,16 @@ namespace LJH.OneCard.HKVisionClient
                     client.Headers.Add("X-Ca-Signature", Sign("POST", dics, url));
                     url = BaseUrl.TrimEnd('/') + url;
                     var retBytes = client.UploadData(url, "POST", System.Text.ASCIIEncoding.UTF8.GetBytes(content));
-                    return LJH.GeneralLibrary.HexStringConverter.HexToString(retBytes, string.Empty);
+                    if (client.ResponseHeaders != null && client.ResponseHeaders.AllKeys != null)
+                    {
+                        var location = client.ResponseHeaders["Location"];
+                        if (!string.IsNullOrEmpty(location))
+                        {
+                           var data= client.DownloadData(location);
+                            if (data != null && data.Length > 0) return LJH.GeneralLibrary.HexStringConverter.HexToString(data, string.Empty);
+                        }
+                    }
+                    return null;
                 }
             }
             catch (Exception ex)
@@ -269,8 +278,8 @@ namespace LJH.OneCard.HKVisionClient
             {
                 pageNo = 1,
                 pageSize = 1000,
-                startTime = new DateTime(begin.Year, begin.Month, begin.Day, begin.Hour, begin.Minute, begin.Second),
-                endTime = new DateTime(end.Year, end.Month, end.Day, end.Hour, end.Minute, end.Second)
+                startTime = begin.ToString("yyyy-MM-ddTHH:mm:ss.fffzzzz"),
+                endTime = end.ToString("yyyy-MM-ddTHH:mm:ss.fffzzzz"),
             };
             var ret = PostRequest<HKVisionCardEvent>(url, JsonConvert.SerializeObject(content), loggerFactory);
             if (ret.Code == 0 && ret.Data != null && ret.Data.List != null && ret.Data.List.Count > 0)
