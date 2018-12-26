@@ -19,8 +19,8 @@ namespace LJH.RegionMonitor.Android
     {
         #region 私有变量
         //private readonly string _LogName = "MainActivity";
-        private readonly string _Url = @"http://192.168.2.116:13002/rm/api";  
-        //private readonly string _Url = @"http://47.92.81.39:13002/rm/api";
+        //private readonly string _Url = @"http://192.168.2.116:13002/rm/api";  
+        private readonly string _Url = @"http://47.92.81.39:13002/rm/api";
         private MonitorRegion _CurrentRegion = null;
         private Thread _ReadCardEventThread = null;
         private DateTime _LastDateTime = DateTime.MinValue;  
@@ -63,7 +63,7 @@ namespace LJH.RegionMonitor.Android
                         {
                             _CurrentRegion.HandleCardEvent(item);
                         }
-                        _LastDateTime = events.Max(it => it.EventTime).AddSeconds(10);
+                        _LastDateTime = events.Max(it => it.EventTime).AddSeconds(-10);
                     }
                     if (_CurrentRegion.InregionUsersChanged)
                     {

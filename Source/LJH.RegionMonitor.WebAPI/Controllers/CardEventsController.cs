@@ -37,7 +37,7 @@ namespace LJH.RegionMonitor.WebAPI.Controllers
             if (search is CardEventSearchCondition)
             {
                 var con = search as CardEventSearchCondition;
-                return _Client.GetCardEvents(con.EventTime.Begin, con.EventTime.End,_ILoggerFactory);
+                return _Client.GetCardEvents(con.EventTime.Begin, con.EventTime.End, _ILoggerFactory);
             }
             return new QueryResultList<CardEvent>(ResultCode.Fail, "没有指定刷卡记录查询条件", null);
         }
