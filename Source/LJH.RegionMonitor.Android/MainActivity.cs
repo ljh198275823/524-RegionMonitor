@@ -4,6 +4,8 @@ using System.Linq;
 using Android.App;
 using Android.Widget;
 using Android.OS;
+using Android.Content;
+using Android.App;
 using Android.Util;
 using System.Threading;
 using LJH.RegionMonitor.Model;
@@ -12,15 +14,15 @@ using LJH.GeneralLibrary.Core;
 using LJH.GeneralLibrary;
 using Newtonsoft.Json;
 
-namespace LJH.RegionMonitor.Android
+namespace LJH.RegionMonitor.AndroidAPP
 {
-    [Activity(Label = "LJHView", MainLauncher = true, Icon = "@drawable/view")]
+    [Activity(Label = "@string/app_name", MainLauncher = true, Icon = "@drawable/view")]
     public class MainActivity : Activity
     {
         #region 私有变量
         //private readonly string _LogName = "MainActivity";
-        //private readonly string _Url = @"http://192.168.2.116:13002/rm/api";  
-        private readonly string _Url = @"http://47.92.81.39:13002/rm/api";
+        //public readonly string _Url = @"http://192.168.2.116:13002/rm/api";  
+        public readonly string _Url = @"http://47.92.81.39:13002/rm/api";
         private MonitorRegion _CurrentRegion = null;
         private Thread _ReadCardEventThread = null;
         private DateTime _LastDateTime = DateTime.MinValue;  
@@ -39,10 +41,6 @@ namespace LJH.RegionMonitor.Android
             if (_CurrentRegion != null)
             {
                 _LastDateTime = DateTime.Now.AddDays(-3);  //从某个时间点的刷卡记录开始算起,一般来说人员不会在区域里面呆超过三天
-                if (_RegionView.Adapter == null)
-                {
-                    _RegionView.Adapter = new RegionMonitorAdapter(this, _CurrentRegion);
-                }
             }
         }
 
@@ -53,6 +51,7 @@ namespace LJH.RegionMonitor.Android
                 try
                 {
                     Thread.Sleep(1000);
+                    if (_CurrentRegion == null) this.RunOnUiThread(() => InitCurrentRegion());
                     if (_CurrentRegion == null) continue;
                     var con = new CardEventSearchCondition() { EventTime = new DateTimeRange() { Begin = _LastDateTime, End = DateTime.Now } };
                     List<CardEvent> events = new CardEventClient(_Url).GetItems(con, true).QueryObjects;
@@ -87,7 +86,14 @@ namespace LJH.RegionMonitor.Android
             {
                 this.ActionBar.Title = _CurrentRegion != null ? $"{ _CurrentRegion.Name}    在场总人数 {_CurrentRegion.InregionUsers.Count }" : "没有设置区域";
             }
-            (_RegionView.Adapter as RegionMonitorAdapter).NotifyDataSetChanged();
+            if (_RegionView.Adapter == null)
+            {
+                _RegionView.Adapter = new RegionMonitorAdapter(this, _CurrentRegion, 120, 48);
+            }
+            else
+            {
+                (_RegionView.Adapter as RegionMonitorAdapter).NotifyDataSetChanged();
+            }
         }
         #endregion
 
@@ -97,20 +103,15 @@ namespace LJH.RegionMonitor.Android
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Main);
             _RegionView = FindViewById<ListView>(Resource.Id.lvRegion);
-
-            InitCurrentRegion(); //初始化当前区域
         }
 
         protected override void OnResume()
         {
-            if (_CurrentRegion != null)
+            if (_ReadCardEventThread == null)
             {
-                if (_ReadCardEventThread == null)
-                {
-                    _ReadCardEventThread = new Thread(new ThreadStart(FreshRegion_Thread));
-                    _ReadCardEventThread.IsBackground = true;
-                    _ReadCardEventThread.Start();
-                }
+                _ReadCardEventThread = new Thread(new ThreadStart(FreshRegion_Thread));
+                _ReadCardEventThread.IsBackground = true;
+                _ReadCardEventThread.Start();
             }
             base.OnResume();
         }

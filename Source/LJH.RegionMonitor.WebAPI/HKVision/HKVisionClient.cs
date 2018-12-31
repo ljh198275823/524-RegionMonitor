@@ -204,7 +204,7 @@ namespace LJH.OneCard.HKVisionClient
                 };
                 if (ret.Data.List[0].PhotoInfo != null)
                 {
-                    person.Photo = GetPhoto(ret.Data.List[0].PhotoInfo, loggerFactory);
+                    person.PhotoUrl = GetPhoto(ret.Data.List[0].PhotoInfo, loggerFactory);
                 }
                 return new QueryResult<PersonDetail>(ResultCode.Successful, ret.Msg, person);
             }
@@ -243,11 +243,7 @@ namespace LJH.OneCard.HKVisionClient
                     if (client.ResponseHeaders != null && client.ResponseHeaders.AllKeys != null)
                     {
                         var location = client.ResponseHeaders["Location"];
-                        if (!string.IsNullOrEmpty(location))
-                        {
-                           var data= client.DownloadData(location);
-                            if (data != null && data.Length > 0) return LJH.GeneralLibrary.HexStringConverter.HexToString(data, string.Empty);
-                        }
+                        return location;
                     }
                     return null;
                 }

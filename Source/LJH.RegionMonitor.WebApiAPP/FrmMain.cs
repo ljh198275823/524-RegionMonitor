@@ -116,7 +116,7 @@ namespace LJH.RegionMonitor.WebApiAPP
                 lblWebhostState.Text = "WebApi服务启动";
                 lblWebhostState.ForeColor = Color.Blue;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 lblWebhostState.Text = "WebApi服务异常";
                 lblWebhostState.ForeColor = Color.Red;

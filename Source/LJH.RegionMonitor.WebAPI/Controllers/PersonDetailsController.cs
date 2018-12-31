@@ -35,6 +35,16 @@ namespace LJH.RegionMonitor.WebAPI.Controllers
             return new QueryResult<PersonDetail>(ret.Result, ret.Message, item);
         }
 
+        //protected override QueryResult<PersonDetail> GetingItemByID(string id)
+        //{
+        //    PersonDetail item = new PersonDetail();
+        //    item.ID = id;
+        //    item.Name = $"用户{id}";
+        //    item.Phone = "13485932340";
+        //    item.PhotoUrl = $"http://47.92.81.39:13002/rm/img/{id}.jpg";
+        //    return new QueryResult<PersonDetail>(ResultCode.Successful, string.Empty, item);
+        //}
+
         protected override QueryResultList<PersonDetail> GetingItems(SearchCondition search)
         {
             return new QueryResultList<PersonDetail>(ResultCode.Successful, "没有实现此方法", null);

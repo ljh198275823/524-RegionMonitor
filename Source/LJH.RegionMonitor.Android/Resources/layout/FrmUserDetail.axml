@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+  <ImageView
+    android:id="@+id/picPhoto"
+    android:layout_width ="160px"
+    android:layout_height="200px"
+    android:background ="#ffffff"
+    android:layout_marginLeft="20px"
+    android:layout_marginRight ="20px"
+    android:scaleType="centerCrop"
+    android:layout_centerVertical="true"/>
+  <TextView
+    android:id="@+id/lblName"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10px"
+    android:textSize="32px"
+    android:text ="姓名："
+    android:background ="#ff0000"
+    android:layout_toRightOf="@id/picPhoto"/>
+  <TextView 
+    android:id="@+id/txtName"
+    android:layout_width ="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="32px"
+    android:layout_toRightOf="@id/lblName"
+    android:layout_alignTop="@id/lblName"
+    android:layout_alignParentRight="true"
+    android:background ="#ffffff"
+    android:text ="" 
+    android:textColor="#000000"/>
+  <TextView
+    android:id="@+id/lblCardID"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10px"
+    android:textSize="32px"
+    android:text ="卡号："
+    android:background ="#ff0000"
+    android:layout_below="@id/lblName"
+    android:layout_alignRight="@id/lblName"/>
+  <TextView
+    android:id="@+id/txtCardID"
+    android:layout_width ="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="32px"
+    android:layout_alignParentRight="true"
+    android:layout_below="@id/txtName"
+    android:layout_alignLeft="@id/txtName"
+    android:layout_alignTop="@id/lblCardID"
+    android:background ="#ffffff"
+    android:text =""
+    android:textColor="#000000"/>
+  <TextView
+    android:id="@+id/lblDept"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10px"
+    android:textSize="32px"
+    android:text ="部门："
+    android:background ="#ff0000"
+    android:layout_below="@id/lblCardID"
+    android:layout_alignRight="@id/lblName"/>
+  <TextView
+    android:id="@+id/txtDept"
+    android:layout_width ="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="32px"
+    android:layout_alignParentRight="true"
+    android:layout_below="@id/txtCardID"
+    android:layout_alignLeft="@id/txtName"
+    android:layout_alignTop="@id/lblDept" 
+    android:background ="#ffffff"
+    android:text =""
+    android:textColor="#000000"/>
+  <TextView
+    android:id="@+id/lblPhone"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10px"
+    android:textSize="32px"
+    android:text ="电话："
+    android:background ="#ff0000"
+    android:layout_below="@id/lblDept"
+    android:layout_alignRight="@id/lblName"/>
+  <TextView
+    android:id="@+id/txtPhone"
+    android:layout_width ="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="32px"
+    android:layout_alignParentRight="true"
+    android:layout_below="@id/txtDept"
+    android:layout_alignLeft="@id/txtName"
+    android:layout_alignTop="@id/lblPhone"
+    android:background ="#ffffff"
+    android:text =""
+    android:textColor="#000000"/>
+  <TextView
+    android:id="@+id/lblDoor"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10px"
+    android:textSize="32px"
+    android:text ="电话："
+    android:background ="#ff0000"
+    android:layout_below="@id/lblPhone"
+    android:layout_alignRight="@id/lblName"/>
+  <TextView
+    android:id="@+id/txtDoor"
+    android:layout_width ="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="32px"
+    android:layout_alignParentRight="true"
+    android:layout_below="@id/txtPhone"
+    android:layout_alignLeft="@id/txtName"
+    android:layout_alignTop="@id/lblDoor"
+    android:background ="#ffffff"
+    android:text =""
+    android:textColor="#000000"/>
+  <TextView
+    android:id="@+id/lblTime"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10px"
+    android:textSize="32px"
+    android:text ="时间："
+    android:background ="#ff0000"
+    android:layout_below="@id/lblDoor"
+    android:layout_alignRight="@id/lblName"/>
+  <TextView
+    android:id="@+id/txtTime"
+    android:layout_width ="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="32px"
+    android:layout_alignParentRight="true"
+    android:layout_below="@id/txtDoor"
+    android:layout_alignLeft="@id/txtName"
+    android:layout_alignTop="@id/lblTime"
+    android:background ="#ffffff"
+    android:text =""
+    android:textColor="#000000"/>
+</RelativeLayout>

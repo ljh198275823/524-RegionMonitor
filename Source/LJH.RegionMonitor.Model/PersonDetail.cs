@@ -31,10 +31,12 @@ namespace LJH.RegionMonitor.Model
         /// 人员编号
         /// </summary>
         public string Certificate { get; set; }
-        /// <summary>
-        /// 人员相片字节十六进制串
-        /// </summary>
+
         public string Photo { get; set; }
+        /// <summary>
+        /// 获取或设置照片URL
+        /// </summary>
+        public string PhotoUrl { get; set; }
         #endregion
     }
 }

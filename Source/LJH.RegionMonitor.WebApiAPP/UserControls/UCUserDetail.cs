@@ -20,31 +20,38 @@ namespace LJH.RegionMonitor.WebApiAPP
 
         public void ShowPeople(InRegionPerson p)
         {
-            txtName.Text = p.UserName;
-            txtCardID.Text = p.CardID;
-            txtDepartment.Text = p.Department;
-            txtDoor.Text = p.DoorName;
-            txtEventDT.Text = p.EnterDateTime.ToString("yyyy-MM-dd HH:mm:ss");
-            var person = new WebAPIClient.PersonDetailClient(AppSettings.Current.ConnStr).GetByID(p.UserID, true).QueryObject;
-            if (person != null)
+            try
             {
-                txtPhone.Text = person.Phone;
-                if (!string.IsNullOrEmpty(person.Photo))
+                txtName.Text = p.UserName;
+                txtCardID.Text = p.CardID;
+                txtDepartment.Text = p.Department;
+                txtDoor.Text = p.DoorName;
+                txtEventDT.Text = p.EnterDateTime.ToString("yyyy-MM-dd HH:mm:ss");
+                txtPhone.Text = string.Empty;
+                picPhoto.Image = null;
+                var person = new WebAPIClient.PersonDetailClient(AppSettings.Current.ConnStr).GetByID(p.UserID, true).QueryObject;
+                if (person != null)
                 {
-                    var bytes = LJH.GeneralLibrary.HexStringConverter.StringToHex(person.Photo);
-                    using (var fs = new MemoryStream(bytes))
+                    txtPhone.Text = person.Phone;
+                    if (!string.IsNullOrEmpty(person.PhotoUrl))
                     {
-                        picPhoto.Image = Image.FromStream(fs);
+                        using (var client = new System.Net.WebClient())
+                        {
+                            var data = client.DownloadData(person.PhotoUrl);
+                            if (data != null && data.Length > 0)
+                            {
+                                using (var fs = new MemoryStream(data))
+                                {
+                                    picPhoto.Image = Image.FromStream(fs);
+                                }
+                            }
+                        }
                     }
                 }
             }
-            //if (!string.IsNullOrEmpty(AppSettings.Current.PhotoPath) && !string.IsNullOrEmpty(p.PhotoPath))
-            //{
-            //    string photo = Path.Combine(AppSettings.Current.PhotoPath, p.PhotoPath);
-            //    if (File.Exists(photo)) picPhoto.Image = Image.FromFile(photo);
-            //}
-            //string phone = new UserBLL(AppSettings.Current.ConnStr).GetPhone(p.CardID);
-            //txtPhone.Text = phone;
+            catch (Exception ex)
+            {
+            }
         }
     }
 }

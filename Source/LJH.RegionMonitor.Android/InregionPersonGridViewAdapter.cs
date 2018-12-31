@@ -11,7 +11,7 @@ using Android.Views;
 using Android.Widget;
 using LJH.RegionMonitor.Model;
 
-namespace LJH.RegionMonitor.Android
+namespace LJH.RegionMonitor.AndroidAPP
 {
     public class InregionPersonGridViewAdapter : BaseAdapter
     {

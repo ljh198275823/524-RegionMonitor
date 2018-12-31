@@ -2,45 +2,38 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:gravity="center">
   <TextView
     android:id="@+id/lblDept"
-    android:layout_width="200dp"
+    android:layout_width="60px"
     android:layout_height="match_parent"
     android:gravity="center"
     android:background="#aaaa00"
-    android:textSize="30dp"
-    android:textColor="#ffffff"
-    >
-  </TextView>
+    android:textSize="32px"
+    android:textColor="#ffffff"/>
   <TextView
     android:layout_width="2px"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:background="#ffffff"
-    >
-  </TextView>
+    android:background="#ffffff"/>
   <TextView
     android:id="@+id/lblCount"
-    android:layout_width="50dp"
+    android:layout_width="40px"
     android:layout_height="match_parent"
     android:gravity="center"
     android:background="#aaaa00"
-    android:textSize="24dp"
-    android:textColor="#ff0000"
-    >
-  </TextView>
-  <GridView 
+    android:textSize="32px"
+    android:textColor="#ff0000"/>
+  <GridView
     android:id="@+id/userGridview"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:columnWidth="100dp"
-    android:padding="10dp"
+    android:layout_height="match_parent"
+    android:columnWidth="120px"
+    android:padding="10px"
     android:numColumns="auto_fit"
-    android:verticalSpacing="10dp"
-    android:horizontalSpacing="10dp"
+    android:verticalSpacing="10px"
+    android:horizontalSpacing="10px"
     android:stretchMode="columnWidth"
-    android:scrollbars="none"
-    >
-  </GridView>
+    android:scrollbars="none" />
 </LinearLayout>

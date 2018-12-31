@@ -10,7 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
-namespace LJH.RegionMonitor.Android
+namespace LJH.RegionMonitor.AndroidAPP
 {
     internal class JavaTag<T> : Java.Lang.Object
     {
