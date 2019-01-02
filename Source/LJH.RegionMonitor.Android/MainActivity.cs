@@ -134,7 +134,7 @@ namespace LJH.RegionMonitor.AndroidAPP
 
         private void _Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            if (_CurDialog != null && _CurDialogCreateTime.AddSeconds(3) <= DateTime.Now)
+            if (_CurDialog != null && _CurDialogCreateTime.AddSeconds(30) <= DateTime.Now)
             {
                 _CurDialog.Dismiss();
                 _CurDialog = null;
