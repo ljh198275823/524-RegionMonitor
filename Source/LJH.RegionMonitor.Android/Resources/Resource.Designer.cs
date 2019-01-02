@@ -45,10 +45,13 @@ namespace LJH.RegionMonitor.AndroidAPP
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int myicon = 2130837504;
+			public const int alarm = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int view = 2130837505;
+			public const int myicon = 2130837505;
+			
+			// aapt resource value: 0x7f020002
+			public const int view = 2130837506;
 			
 			static Drawable()
 			{
@@ -66,8 +69,8 @@ namespace LJH.RegionMonitor.AndroidAPP
 			// aapt resource value: 0x7f060003
 			public const int lblCardID = 2131099651;
 			
-			// aapt resource value: 0x7f06000d
-			public const int lblCount = 2131099661;
+			// aapt resource value: 0x7f06000e
+			public const int lblCount = 2131099662;
 			
 			// aapt resource value: 0x7f060005
 			public const int lblDept = 2131099653;
@@ -84,11 +87,14 @@ namespace LJH.RegionMonitor.AndroidAPP
 			// aapt resource value: 0x7f06000b
 			public const int lblTime = 2131099659;
 			
-			// aapt resource value: 0x7f06000f
-			public const int lblUser = 2131099663;
-			
 			// aapt resource value: 0x7f060010
-			public const int lvRegion = 2131099664;
+			public const int lblUser = 2131099664;
+			
+			// aapt resource value: 0x7f060011
+			public const int lvRegion = 2131099665;
+			
+			// aapt resource value: 0x7f06000d
+			public const int picAlarm = 2131099661;
 			
 			// aapt resource value: 0x7f060000
 			public const int picPhoto = 2131099648;
@@ -111,8 +117,8 @@ namespace LJH.RegionMonitor.AndroidAPP
 			// aapt resource value: 0x7f06000c
 			public const int txtTime = 2131099660;
 			
-			// aapt resource value: 0x7f06000e
-			public const int userGridview = 2131099662;
+			// aapt resource value: 0x7f06000f
+			public const int userGridview = 2131099663;
 			
 			static Id()
 			{

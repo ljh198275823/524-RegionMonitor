@@ -48,6 +48,7 @@ namespace LJH.RegionMonitor.Model
                 {
                     _PersonChanged = false; //获取到当前的所有人员后,变化标志设置为假
                     return (from u in _Person.Values
+                            where u.IsInRegion || u.IsTimeout  //只有在场和超时未出的人员是有效的在场人员
                             orderby u.EnterDateTime ascending
                             select u).ToList();
                 }

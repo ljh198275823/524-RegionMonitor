@@ -141,4 +141,13 @@
     android:layout_alignTop="@id/lblTime"
     android:background ="#ffffff"
     android:textColor="#000000"/>
+   <ImageView
+    android:id="@+id/picAlarm"
+    android:layout_width ="match_parent"
+    android:layout_height="250px"
+    android:src="@drawable/alarm"
+    android:layout_margin="20px"
+    android:scaleType="centerCrop"
+    android:layout_below="@id/txtTime"
+    />
 </RelativeLayout>
