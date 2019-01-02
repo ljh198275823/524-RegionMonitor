@@ -21,8 +21,8 @@ namespace LJH.RegionMonitor.AndroidAPP
     {
         #region 私有变量
         //private readonly string _LogName = "MainActivity";
-        //public readonly string _Url = @"http://192.168.2.116:13002/rm/api";  
-        public readonly string _Url = @"http://47.92.81.39:13002/rm/api";
+        public readonly string _Url = @"http://192.168.2.116:13002/rm/api";
+        //public readonly string _Url = @"http://47.92.81.39:13002/rm/api";
         private MonitorRegion _CurrentRegion = null;
         private Thread _ReadCardEventThread = null;
         private DateTime _LastDateTime = DateTime.MinValue;  
@@ -88,7 +88,7 @@ namespace LJH.RegionMonitor.AndroidAPP
             }
             if (_RegionView.Adapter == null)
             {
-                _RegionView.Adapter = new RegionMonitorAdapter(this, _CurrentRegion, 120, 48);
+                _RegionView.Adapter = new RegionMonitorAdapter(this, _CurrentRegion, 200, 48);
             }
             else
             {

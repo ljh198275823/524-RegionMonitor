@@ -4,8 +4,8 @@
     android:layout_height="wrap_content">
   <ImageView
     android:id="@+id/picPhoto"
-    android:layout_width ="160px"
-    android:layout_height="200px"
+    android:layout_width ="200px"
+    android:layout_height="240px"
     android:background ="#ffffff"
     android:layout_marginLeft="20px"
     android:layout_marginRight ="20px"
@@ -18,7 +18,8 @@
     android:layout_marginTop="10px"
     android:textSize="32px"
     android:text ="姓名："
-    android:background ="#ff0000"
+    android:background ="#ffffff"
+    android:textColor="#000000"
     android:layout_toRightOf="@id/picPhoto"/>
   <TextView 
     android:id="@+id/txtName"
@@ -29,7 +30,6 @@
     android:layout_alignTop="@id/lblName"
     android:layout_alignParentRight="true"
     android:background ="#ffffff"
-    android:text ="" 
     android:textColor="#000000"/>
   <TextView
     android:id="@+id/lblCardID"
@@ -38,7 +38,8 @@
     android:layout_marginTop="10px"
     android:textSize="32px"
     android:text ="卡号："
-    android:background ="#ff0000"
+    android:background ="#ffffff"
+    android:textColor="#000000"
     android:layout_below="@id/lblName"
     android:layout_alignRight="@id/lblName"/>
   <TextView
@@ -51,7 +52,6 @@
     android:layout_alignLeft="@id/txtName"
     android:layout_alignTop="@id/lblCardID"
     android:background ="#ffffff"
-    android:text =""
     android:textColor="#000000"/>
   <TextView
     android:id="@+id/lblDept"
@@ -60,7 +60,8 @@
     android:layout_marginTop="10px"
     android:textSize="32px"
     android:text ="部门："
-    android:background ="#ff0000"
+    android:background ="#ffffff"
+    android:textColor="#000000"
     android:layout_below="@id/lblCardID"
     android:layout_alignRight="@id/lblName"/>
   <TextView
@@ -73,7 +74,6 @@
     android:layout_alignLeft="@id/txtName"
     android:layout_alignTop="@id/lblDept" 
     android:background ="#ffffff"
-    android:text =""
     android:textColor="#000000"/>
   <TextView
     android:id="@+id/lblPhone"
@@ -82,7 +82,8 @@
     android:layout_marginTop="10px"
     android:textSize="32px"
     android:text ="电话："
-    android:background ="#ff0000"
+    android:background ="#ffffff"
+    android:textColor="#000000"
     android:layout_below="@id/lblDept"
     android:layout_alignRight="@id/lblName"/>
   <TextView
@@ -94,8 +95,7 @@
     android:layout_below="@id/txtDept"
     android:layout_alignLeft="@id/txtName"
     android:layout_alignTop="@id/lblPhone"
-    android:background ="#ffffff"
-    android:text =""
+    android:background ="#ff0000"
     android:textColor="#000000"/>
   <TextView
     android:id="@+id/lblDoor"
@@ -103,8 +103,9 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="10px"
     android:textSize="32px"
-    android:text ="电话："
-    android:background ="#ff0000"
+    android:textColor="#000000"
+    android:text ="入口："
+    android:background ="#ffffff"
     android:layout_below="@id/lblPhone"
     android:layout_alignRight="@id/lblName"/>
   <TextView
@@ -117,16 +118,16 @@
     android:layout_alignLeft="@id/txtName"
     android:layout_alignTop="@id/lblDoor"
     android:background ="#ffffff"
-    android:text =""
     android:textColor="#000000"/>
   <TextView
     android:id="@+id/lblTime"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="10px"
+    android:background ="#ffffff"
     android:textSize="32px"
+    android:textColor="#000000"
     android:text ="时间："
-    android:background ="#ff0000"
     android:layout_below="@id/lblDoor"
     android:layout_alignRight="@id/lblName"/>
   <TextView
@@ -139,6 +140,5 @@
     android:layout_alignLeft="@id/txtName"
     android:layout_alignTop="@id/lblTime"
     android:background ="#ffffff"
-    android:text =""
     android:textColor="#000000"/>
 </RelativeLayout>
