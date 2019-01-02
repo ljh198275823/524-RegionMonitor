@@ -15,6 +15,7 @@ using Newtonsoft.Json;
 
 namespace LJH.RegionMonitor.AndroidAPP
 {
+    //[Activity(Label = "@string/app_name", MainLauncher = true, Icon = "@drawable/view" ,Theme = "@android:style/Theme.Material.Light.DarkActionBar")]
     [Activity(Label = "@string/app_name", MainLauncher = true, Icon = "@drawable/view")]
     public class MainActivity : Activity
     {
@@ -140,6 +141,15 @@ namespace LJH.RegionMonitor.AndroidAPP
                 _CurDialog = null;
                 _Timer.Stop();
             }
+            else if (_CurDialog == null)
+            {
+                _Timer.Stop();
+            }
+            else if (_CurDialog != null && !_CurDialog.IsShowing)
+            {
+                _CurDialog.Dismiss();
+                _CurDialog = null;
+            }
         }
 
         protected override void OnResume()
@@ -181,88 +191,91 @@ namespace LJH.RegionMonitor.AndroidAPP
         #endregion
 
         #region 公共方法
-        public void ShowInRegionPersonDetail(InRegionPerson regionPerson)
+        public void ShowInRegionPersonDetail(InRegionPerson item)
         {
-            if (_CurDialog != null) _CurDialog.Dismiss();
-            var builder = new AlertDialog.Builder(this);
-            var view = LayoutInflater.Inflate(Resource.Layout.FrmUserDetail, null);
-            var txtName = view.FindViewById<TextView>(Resource.Id.txtName);
-            txtName.Text = regionPerson.UserName;
-            var txtCardID = view.FindViewById<TextView>(Resource.Id.txtCardID);
-            txtCardID.Text = regionPerson.CardID;
-            var txtDept = view.FindViewById<TextView>(Resource.Id.txtDept);
-            txtDept.Text = regionPerson.Department;
-            var txtDoor = view.FindViewById<TextView>(Resource.Id.txtDoor);
-            txtDoor.Text = regionPerson.DoorName;
-            var txtTime = view.FindViewById<TextView>(Resource.Id.txtTime);
-            txtTime.Text = regionPerson.EnterDateTime.ToString("yyyy-MM-dd HH:mm:ss");
-            var person = new WebAPIClient.PersonDetailClient(_Url).GetByID(regionPerson.UserID, true).QueryObject;
+            if (_CurDialog == null || !_CurDialog.IsShowing) _CurDialog = CreateDialog();
+            _CurDialogCreateTime = DateTime.Now;
+            var txtName = _CurDialog.FindViewById<TextView>(Resource.Id.txtName);
+            txtName.Text = item.UserName;
+            var txtCardID = _CurDialog.FindViewById<TextView>(Resource.Id.txtCardID);
+            txtCardID.Text = item.CardID;
+            var txtDept = _CurDialog.FindViewById<TextView>(Resource.Id.txtDept);
+            txtDept.Text = item.Department;
+            var txtDoor = _CurDialog.FindViewById<TextView>(Resource.Id.txtDoor);
+            txtDoor.Text = item.DoorName;
+            var txtTime = _CurDialog.FindViewById<TextView>(Resource.Id.txtTime);
+            txtTime.Text = item.EnterDateTime.ToString("yyyy-MM-dd HH:mm:ss");
+            var picAlarm = _CurDialog.FindViewById<ImageView>(Resource.Id.picAlarm);
+            picAlarm.Visibility = Android.Views.ViewStates.Gone;
+            var person = new WebAPIClient.PersonDetailClient(_Url).GetByID(item.UserID, true).QueryObject;
             if (person != null)
             {
-                if (!string.IsNullOrEmpty(person.Phone))
-                {
-                    var txtPhone = view.FindViewById<TextView>(Resource.Id.txtPhone);
-                    txtPhone.Text = person.Phone;
-                }
+                var txtPhone = _CurDialog.FindViewById<TextView>(Resource.Id.txtPhone);
+                txtPhone.Text = person.Phone;
+                var picPhoto = _CurDialog.FindViewById<ImageView>(Resource.Id.picPhoto);
+                picPhoto.SetImageBitmap(null);
                 if (!string.IsNullOrEmpty(person.PhotoUrl))
                 {
                     var bytes = DownloadPhoto(person.PhotoUrl);
                     if (bytes != null && bytes.Length > 0)
                     {
-                        var picPhoto = view.FindViewById<ImageView>(Resource.Id.picPhoto);
                         var bmp = BitmapFactory.DecodeByteArray(bytes, 0, bytes.Length);
                         picPhoto.SetImageBitmap(bmp);
                     }
                 }
             }
-            builder.SetView(view);
-            builder.SetPositiveButton("确定", (EventHandler<DialogClickEventArgs>)null);
-            _CurDialog = builder.Show();
-            _CurDialogCreateTime = DateTime.Now;
-            _Timer.Start();
         }
 
         public void ShowInRegionPersonDetail(CardEvent ce, bool isIn)
         {
-            if (_CurDialog != null) _CurDialog.Dismiss();
-            var builder = new AlertDialog.Builder(this);
-            var view = LayoutInflater.Inflate(Resource.Layout.FrmUserDetail, null);
-            var txtName = view.FindViewById<TextView>(Resource.Id.txtName);
+            if (_CurDialog == null || !_CurDialog.IsShowing) _CurDialog = CreateDialog();
+            _CurDialogCreateTime = DateTime.Now;
+            var txtName = _CurDialog.FindViewById<TextView>(Resource.Id.txtName);
             txtName.Text = ce.UserName;
-            var txtCardID = view.FindViewById<TextView>(Resource.Id.txtCardID);
+            var txtCardID = _CurDialog.FindViewById<TextView>(Resource.Id.txtCardID);
             txtCardID.Text = ce.CardID;
-            var txtDept = view.FindViewById<TextView>(Resource.Id.txtDept);
+            var txtDept = _CurDialog.FindViewById<TextView>(Resource.Id.txtDept);
             txtDept.Text = ce.Department;
-            var txtDoor = view.FindViewById<TextView>(Resource.Id.txtDoor);
+            var txtDoor = _CurDialog.FindViewById<TextView>(Resource.Id.txtDoor);
             txtDoor.Text = ce.DoorName;
-            var txtTime = view.FindViewById<TextView>(Resource.Id.txtTime);
+            var txtTime = _CurDialog.FindViewById<TextView>(Resource.Id.txtTime);
             txtTime.Text = ce.EventTime.ToString("yyyy-MM-dd HH:mm:ss");
-            var picAlarm = view.FindViewById<ImageView>(Resource.Id.picAlarm);
+            var picAlarm = _CurDialog.FindViewById<ImageView>(Resource.Id.picAlarm);
             if (!isIn) picAlarm.Visibility = Android.Views.ViewStates.Gone;
+            else picAlarm.Visibility = Android.Views.ViewStates.Visible;
             var person = new WebAPIClient.PersonDetailClient(_Url).GetByID(ce.UserID, true).QueryObject;
             if (person != null)
             {
-                if (!string.IsNullOrEmpty(person.Phone))
-                {
-                    var txtPhone = view.FindViewById<TextView>(Resource.Id.txtPhone);
-                    txtPhone.Text = person.Phone;
-                }
+                var txtPhone = _CurDialog.FindViewById<TextView>(Resource.Id.txtPhone);
+                txtPhone.Text = person.Phone;
+                var picPhoto = _CurDialog.FindViewById<ImageView>(Resource.Id.picPhoto);
+                picPhoto.SetImageBitmap(null);
                 if (!string.IsNullOrEmpty(person.PhotoUrl))
                 {
                     var bytes = DownloadPhoto(person.PhotoUrl);
                     if (bytes != null && bytes.Length > 0)
                     {
-                        var picPhoto = view.FindViewById<ImageView>(Resource.Id.picPhoto);
                         var bmp = BitmapFactory.DecodeByteArray(bytes, 0, bytes.Length);
                         picPhoto.SetImageBitmap(bmp);
                     }
                 }
             }
-            builder.SetView(view);
-            builder.SetPositiveButton("确定", (EventHandler<DialogClickEventArgs>)null);
-            _CurDialog = builder.Show();
-            _CurDialogCreateTime = DateTime.Now;
+        }
+
+        private AlertDialog CreateDialog()
+        {
+            var builder = new AlertDialog.Builder(this);
+            var _AlertView = LayoutInflater.Inflate(Resource.Layout.FrmUserDetail, null);
+            builder.SetView(_AlertView);
+            builder.SetPositiveButton("确定", AlertDialog_Click);
             _Timer.Start();
+            return builder.Show();
+        }
+
+        private void AlertDialog_Click(object sender, DialogClickEventArgs e)
+        {
+            _CurDialog = null;
+            _Timer.Stop();
         }
         #endregion
     }
