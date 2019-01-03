@@ -107,6 +107,25 @@ namespace LJH.RegionMonitor.AndroidAPP
             }
         }
 
+        private void _Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            if (_CurDialog != null && _CurDialogCreateTime.AddSeconds(30) <= DateTime.Now)
+            {
+                _CurDialog.Dismiss();
+                _CurDialog = null;
+                _Timer.Stop();
+            }
+            else if (_CurDialog == null)
+            {
+                _Timer.Stop();
+            }
+            else if (_CurDialog != null && !_CurDialog.IsShowing)
+            {
+                _CurDialog.Dismiss();
+                _CurDialog = null;
+            }
+        }
+
         private byte[] DownloadPhoto(string url)
         {
             try
@@ -131,25 +150,7 @@ namespace LJH.RegionMonitor.AndroidAPP
             _RegionView = FindViewById<ListView>(Resource.Id.lvRegion);
             _Timer = new System.Timers.Timer(1000);
             _Timer.Elapsed += _Timer_Elapsed;
-        }
-
-        private void _Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            if (_CurDialog != null && _CurDialogCreateTime.AddSeconds(30) <= DateTime.Now)
-            {
-                _CurDialog.Dismiss();
-                _CurDialog = null;
-                _Timer.Stop();
-            }
-            else if (_CurDialog == null)
-            {
-                _Timer.Stop();
-            }
-            else if (_CurDialog != null && !_CurDialog.IsShowing)
-            {
-                _CurDialog.Dismiss();
-                _CurDialog = null;
-            }
+            Handler myHandler = new Handler();
         }
 
         protected override void OnResume()
