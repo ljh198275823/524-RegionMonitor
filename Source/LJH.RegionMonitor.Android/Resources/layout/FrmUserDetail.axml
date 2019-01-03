@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background ="#ffffff">
+    android:layout_height="wrap_content">
   <ImageView
     android:id="@+id/picPhoto"
     android:layout_width ="200px"
@@ -94,6 +93,7 @@
     android:layout_below="@id/txtDept"
     android:layout_alignLeft="@id/txtName"
     android:layout_alignTop="@id/lblPhone"
+    android:background ="#ffffff"
     android:textColor="#ff0000"/>
   <TextView
     android:id="@+id/lblDoor"
@@ -145,7 +145,7 @@
     android:layout_height="250px"
     android:src="@drawable/alarm"
     android:layout_marginTop="10px"
-    android:scaleType="fitStart"
+    android:scaleType="fitXY"
     android:layout_below="@id/lblTime"
     android:layout_alignParentLeft="true"
     />

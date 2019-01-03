@@ -119,11 +119,6 @@ namespace LJH.RegionMonitor.AndroidAPP
             {
                 _Timer.Stop();
             }
-            else if (_CurDialog != null && !_CurDialog.IsShowing)
-            {
-                _CurDialog.Dismiss();
-                _CurDialog = null;
-            }
         }
 
         private byte[] DownloadPhoto(string url)
@@ -150,7 +145,6 @@ namespace LJH.RegionMonitor.AndroidAPP
             _RegionView = FindViewById<ListView>(Resource.Id.lvRegion);
             _Timer = new System.Timers.Timer(1000);
             _Timer.Elapsed += _Timer_Elapsed;
-            Handler myHandler = new Handler();
         }
 
         protected override void OnResume()
@@ -265,10 +259,15 @@ namespace LJH.RegionMonitor.AndroidAPP
 
         private AlertDialog CreateDialog()
         {
+            if (_CurDialog != null && !_CurDialog.IsShowing) 
+            {
+                _CurDialog.Dismiss();
+                _CurDialog = null;
+            }
             var builder = new AlertDialog.Builder(this);
             var _AlertView = LayoutInflater.Inflate(Resource.Layout.FrmUserDetail, null);
             builder.SetView(_AlertView);
-            builder.SetPositiveButton("确定", AlertDialog_Click);
+            //builder.SetPositiveButton("确定", AlertDialog_Click);
             _Timer.Start();
             return builder.Show();
         }
