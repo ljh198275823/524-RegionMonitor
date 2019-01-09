@@ -257,18 +257,18 @@ namespace LJH.OneCard.HKVisionClient
 
         public QueryResultList<CardEvent> GetCardEvents(DateTime begin, DateTime end, ILoggerFactory loggerFactory)
         {
-            if (_Depts == null)
+            //if (_Depts == null)
+            //{
+            var ds = GetDepts(loggerFactory).QueryObjects;
+            if (ds != null && ds.Count > 0)
             {
-                var ds = GetDepts(loggerFactory).QueryObjects;
-                if (ds != null && ds.Count > 0)
+                _Depts = new Dictionary<string, HKVisionDept>();
+                foreach (var d in ds)
                 {
-                    _Depts = new Dictionary<string, HKVisionDept>();
-                    foreach (var d in ds)
-                    {
-                        if (!_Depts.ContainsKey(d.ID)) _Depts.Add(d.ID, d);
-                    }
+                    if (!_Depts.ContainsKey(d.ID)) _Depts.Add(d.ID, d);
                 }
             }
+            //}
             var url = "/artemis/api/acs/v1/door/events";
             var content = new
             {

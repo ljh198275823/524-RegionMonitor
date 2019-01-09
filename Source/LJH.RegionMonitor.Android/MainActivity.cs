@@ -20,8 +20,8 @@ namespace LJH.RegionMonitor.AndroidAPP
     public class MainActivity : Activity
     {
         #region 私有变量
-        //private readonly string _Url = @"http://192.168.2.116:13002/rm/api";
-        private readonly string _Url = @"http://47.92.81.39:13002/rm/api";
+        private readonly string _Url = @"http://192.168.2.116:13002/rm/api";
+        //private readonly string _Url = @"http://47.92.81.39:13002/rm/api";
         private MonitorRegion _CurrentRegion = null;
         private Thread _ReadCardEventThread = null;
         private DateTime _LastDateTime = DateTime.MinValue;
@@ -44,7 +44,7 @@ namespace LJH.RegionMonitor.AndroidAPP
             }
             if (_CurrentRegion != null)
             {
-                _LastDateTime = DateTime.Now.AddDays(-3);  //从某个时间点的刷卡记录开始算起,一般来说人员不会在区域里面呆超过三天
+                _LastDateTime = DateTime.Now.AddDays(-2);  //从某个时间点的刷卡记录开始算起,一般来说人员不会在区域里面呆超过三天
                 _FirstTime = true;
             }
         }
@@ -58,7 +58,7 @@ namespace LJH.RegionMonitor.AndroidAPP
                     Thread.Sleep(1000);
                     if (_CurrentRegion == null) this.RunOnUiThread(() => InitCurrentRegion());
                     if (_CurrentRegion == null) continue;
-                    var con = new CardEventSearchCondition() { EventTime = new DateTimeRange() { Begin = _LastDateTime, End = DateTime.Now } };
+                    var con = new CardEventSearchCondition() { EventTime = new DateTimeRange() { Begin = _LastDateTime, End = DateTime.Now.AddMinutes(30) } }; //这里获取事件的时间为当前时间再往前半个小时
                     List<CardEvent> events = new CardEventClient(_Url).GetItems(con, true).QueryObjects;
                     if (events != null && events.Count > 0)
                     {

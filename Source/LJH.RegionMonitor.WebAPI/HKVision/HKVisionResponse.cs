@@ -43,6 +43,8 @@ namespace LJH.OneCard.HKVisionClient
         public string ID { get; set; }
         [JsonProperty("personName")]
         public string Name { get; set; }
+        [JsonProperty("orgIndexCode")]
+        public  string DepartmentID { get; set; }
         [JsonProperty("orgName")]
         public string Department { get; set; }
         [JsonProperty("phoneNo")]
