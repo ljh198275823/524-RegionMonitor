@@ -135,7 +135,7 @@ namespace LJH.RegionMonitor.AndroidAPP
                 _CurDialog.Dismiss();
                 _CurDialog = null;
                 _Timer.Stop();
-                StopAudio();
+                //StopAudio();
             }
             else if (_CurDialog == null)
             {
@@ -160,16 +160,18 @@ namespace LJH.RegionMonitor.AndroidAPP
 
         private void StartAudio()
         {
-            if (_MediaPlayer == null)
+            try
             {
-                _MediaPlayer = MediaPlayer.Create(this, Resource.Raw.Alerting);
+               if (!_MediaPlayer.IsPlaying)
+                {
+                    //_MediaPlayer.Looping = true;
+                    //_MediaPlayer.SeekTo(0);
+                    _MediaPlayer.Start();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                _MediaPlayer.Reset();
-                _MediaPlayer.Prepare();
-                _MediaPlayer.Start();
-                _MediaPlayer.Looping = true;
+
             }
         }
 
@@ -177,7 +179,7 @@ namespace LJH.RegionMonitor.AndroidAPP
         {
             if (_MediaPlayer!= null)
             {
-                _MediaPlayer.Stop();
+                _MediaPlayer.Pause();
             }
         }
         #endregion
@@ -200,6 +202,7 @@ namespace LJH.RegionMonitor.AndroidAPP
                 _ReadCardEventThread.IsBackground = true;
                 _ReadCardEventThread.Start();
             }
+            if (_MediaPlayer == null) _MediaPlayer = MediaPlayer.Create(this, Resource.Raw.Alerting);
             base.OnResume();
         }
 
