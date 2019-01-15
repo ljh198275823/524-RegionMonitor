@@ -23,6 +23,7 @@ namespace LJH.RegionMonitor.WebApiAPP
         private void ShowRegion(Region region)
         {
             txtName.Text = region.Name;
+            chk不显示超时未出人员.Checked = region.HideTimeOutPerson;
             var doors = new DoorClient(AppSettings.Current.ConnStr).GetItems(null, true).QueryObjects;
             if (doors == null || doors.Count == 0) return;
             viewEntrance.Rows.Clear();
@@ -154,6 +155,7 @@ namespace LJH.RegionMonitor.WebApiAPP
             var region = MonitorRegion != null ? MonitorRegion : new Region();
             region.ID = 1;
             region.Name = txtName.Text;
+            region.HideTimeOutPerson = chk不显示超时未出人员.Checked;
             region.EnterDoors = new List<string>();
             foreach (DataGridViewRow row in viewEntrance.Rows)
             {

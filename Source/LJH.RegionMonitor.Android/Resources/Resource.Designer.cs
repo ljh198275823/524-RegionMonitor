@@ -66,59 +66,59 @@ namespace LJH.RegionMonitor.AndroidAPP
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f060003
-			public const int lblCardID = 2131099651;
+			// aapt resource value: 0x7f070003
+			public const int lblCardID = 2131165187;
 			
-			// aapt resource value: 0x7f06000e
-			public const int lblCount = 2131099662;
+			// aapt resource value: 0x7f07000e
+			public const int lblCount = 2131165198;
 			
-			// aapt resource value: 0x7f060005
-			public const int lblDept = 2131099653;
+			// aapt resource value: 0x7f070005
+			public const int lblDept = 2131165189;
 			
-			// aapt resource value: 0x7f060009
-			public const int lblDoor = 2131099657;
+			// aapt resource value: 0x7f070009
+			public const int lblDoor = 2131165193;
 			
-			// aapt resource value: 0x7f060001
-			public const int lblName = 2131099649;
+			// aapt resource value: 0x7f070001
+			public const int lblName = 2131165185;
 			
-			// aapt resource value: 0x7f060007
-			public const int lblPhone = 2131099655;
+			// aapt resource value: 0x7f070007
+			public const int lblPhone = 2131165191;
 			
-			// aapt resource value: 0x7f06000b
-			public const int lblTime = 2131099659;
+			// aapt resource value: 0x7f07000b
+			public const int lblTime = 2131165195;
 			
-			// aapt resource value: 0x7f060010
-			public const int lblUser = 2131099664;
+			// aapt resource value: 0x7f070010
+			public const int lblUser = 2131165200;
 			
-			// aapt resource value: 0x7f060011
-			public const int lvRegion = 2131099665;
+			// aapt resource value: 0x7f070011
+			public const int lvRegion = 2131165201;
 			
-			// aapt resource value: 0x7f06000d
-			public const int picAlarm = 2131099661;
+			// aapt resource value: 0x7f07000d
+			public const int picAlarm = 2131165197;
 			
-			// aapt resource value: 0x7f060000
-			public const int picPhoto = 2131099648;
+			// aapt resource value: 0x7f070000
+			public const int picPhoto = 2131165184;
 			
-			// aapt resource value: 0x7f060004
-			public const int txtCardID = 2131099652;
+			// aapt resource value: 0x7f070004
+			public const int txtCardID = 2131165188;
 			
-			// aapt resource value: 0x7f060006
-			public const int txtDept = 2131099654;
+			// aapt resource value: 0x7f070006
+			public const int txtDept = 2131165190;
 			
-			// aapt resource value: 0x7f06000a
-			public const int txtDoor = 2131099658;
+			// aapt resource value: 0x7f07000a
+			public const int txtDoor = 2131165194;
 			
-			// aapt resource value: 0x7f060002
-			public const int txtName = 2131099650;
+			// aapt resource value: 0x7f070002
+			public const int txtName = 2131165186;
 			
-			// aapt resource value: 0x7f060008
-			public const int txtPhone = 2131099656;
+			// aapt resource value: 0x7f070008
+			public const int txtPhone = 2131165192;
 			
-			// aapt resource value: 0x7f06000c
-			public const int txtTime = 2131099660;
+			// aapt resource value: 0x7f07000c
+			public const int txtTime = 2131165196;
 			
-			// aapt resource value: 0x7f06000f
-			public const int userGridview = 2131099663;
+			// aapt resource value: 0x7f07000f
+			public const int userGridview = 2131165199;
 			
 			static Id()
 			{
@@ -171,14 +171,30 @@ namespace LJH.RegionMonitor.AndroidAPP
 			}
 		}
 		
-		public partial class String
+		public partial class Raw
 		{
 			
 			// aapt resource value: 0x7f050000
-			public const int app_name = 2131034112;
+			public const int Alerting = 2131034112;
 			
-			// aapt resource value: 0x7f050001
-			public const int app_title = 2131034113;
+			static Raw()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Raw()
+			{
+			}
+		}
+		
+		public partial class String
+		{
+			
+			// aapt resource value: 0x7f060000
+			public const int app_name = 2131099648;
+			
+			// aapt resource value: 0x7f060001
+			public const int app_title = 2131099649;
 			
 			static String()
 			{

@@ -14,6 +14,7 @@ namespace LJH.RegionMonitor.Model
         public MonitorRegion(Region region)
         {
             this.Name = region.Name;
+            this.HideTimeOutPerson = region.HideTimeOutPerson;
             this.EnterDoors = region.EnterDoors;
             this.ExitDoors = region.ExitDoors;
         }
@@ -30,10 +31,18 @@ namespace LJH.RegionMonitor.Model
         /// 获取或设置区域名称
         /// </summary>
         public string Name { get; set; }
-
+        /// <summary>
+        /// 获取或设置入口门禁点
+        /// </summary>
         public List<string> EnterDoors { get; set; }
-
+        /// <summary>
+        /// 获取或设置出场门禁点
+        /// </summary>
         public List<string> ExitDoors { get; set; }
+        /// <summary>
+        /// 获取或设置隐藏超时未出人员
+        /// </summary>
+        public bool HideTimeOutPerson { get; set; }
         #endregion
 
         #region 只读属性
@@ -135,6 +144,15 @@ namespace LJH.RegionMonitor.Model
                     ExitRegion(item);
                     return;
                 }
+            }
+        }
+
+        public void SetRegionParams(Region region)
+        {
+            if(this.HideTimeOutPerson !=region.HideTimeOutPerson )
+            {
+                this.HideTimeOutPerson = region.HideTimeOutPerson;
+                _PersonChanged = true;
             }
         }
         #endregion

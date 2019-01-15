@@ -40,21 +40,22 @@
             this.txtName = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.viewEntrance = new System.Windows.Forms.DataGridView();
+            this.colIDEnter = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNameEnter = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuEntrance = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnu_AddEnter = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_DelEnter = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.viewExit = new System.Windows.Forms.DataGridView();
+            this.colIDExit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colNameExit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.mnuExit = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.mnu_AddExit = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuDelExit = new System.Windows.Forms.ToolStripMenuItem();
             this.label2 = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
-            this.colIDEnter = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNameEnter = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colIDExit = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNameExit = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chk不显示超时未出人员 = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.viewEntrance)).BeginInit();
             this.menuEntrance.SuspendLayout();
@@ -77,7 +78,7 @@
             this.txtName.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.txtName.Location = new System.Drawing.Point(88, 18);
             this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(358, 26);
+            this.txtName.Size = new System.Drawing.Size(277, 26);
             this.txtName.TabIndex = 1;
             // 
             // groupBox1
@@ -138,6 +139,23 @@
             this.viewEntrance.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.viewEntrance.Size = new System.Drawing.Size(425, 366);
             this.viewEntrance.TabIndex = 57;
+            // 
+            // colIDEnter
+            // 
+            this.colIDEnter.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colIDEnter.HeaderText = "编号";
+            this.colIDEnter.MinimumWidth = 200;
+            this.colIDEnter.Name = "colIDEnter";
+            this.colIDEnter.ReadOnly = true;
+            this.colIDEnter.Width = 200;
+            // 
+            // colNameEnter
+            // 
+            this.colNameEnter.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colNameEnter.HeaderText = "名称";
+            this.colNameEnter.MinimumWidth = 100;
+            this.colNameEnter.Name = "colNameEnter";
+            this.colNameEnter.ReadOnly = true;
             // 
             // menuEntrance
             // 
@@ -220,6 +238,23 @@
             this.viewExit.Size = new System.Drawing.Size(424, 366);
             this.viewExit.TabIndex = 58;
             // 
+            // colIDExit
+            // 
+            this.colIDExit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.colIDExit.HeaderText = "编号";
+            this.colIDExit.MinimumWidth = 200;
+            this.colIDExit.Name = "colIDExit";
+            this.colIDExit.ReadOnly = true;
+            this.colIDExit.Width = 200;
+            // 
+            // colNameExit
+            // 
+            this.colNameExit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.colNameExit.HeaderText = "名称";
+            this.colNameExit.MinimumWidth = 100;
+            this.colNameExit.Name = "colNameExit";
+            this.colNameExit.ReadOnly = true;
+            // 
             // mnuExit
             // 
             this.mnuExit.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -246,7 +281,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(452, 25);
+            this.label2.Location = new System.Drawing.Point(371, 25);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(11, 12);
             this.label2.TabIndex = 4;
@@ -277,45 +312,24 @@
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
-            // colIDEnter
+            // chk不显示超时未出人员
             // 
-            this.colIDEnter.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colIDEnter.HeaderText = "编号";
-            this.colIDEnter.MinimumWidth = 200;
-            this.colIDEnter.Name = "colIDEnter";
-            this.colIDEnter.ReadOnly = true;
-            this.colIDEnter.Width = 200;
-            // 
-            // colNameEnter
-            // 
-            this.colNameEnter.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colNameEnter.HeaderText = "名称";
-            this.colNameEnter.MinimumWidth = 100;
-            this.colNameEnter.Name = "colNameEnter";
-            this.colNameEnter.ReadOnly = true;
-            // 
-            // colIDExit
-            // 
-            this.colIDExit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.colIDExit.HeaderText = "编号";
-            this.colIDExit.MinimumWidth = 200;
-            this.colIDExit.Name = "colIDExit";
-            this.colIDExit.ReadOnly = true;
-            this.colIDExit.Width = 200;
-            // 
-            // colNameExit
-            // 
-            this.colNameExit.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colNameExit.HeaderText = "名称";
-            this.colNameExit.MinimumWidth = 100;
-            this.colNameExit.Name = "colNameExit";
-            this.colNameExit.ReadOnly = true;
+            this.chk不显示超时未出人员.AutoSize = true;
+            this.chk不显示超时未出人员.Font = new System.Drawing.Font("宋体", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.chk不显示超时未出人员.ForeColor = System.Drawing.Color.Red;
+            this.chk不显示超时未出人员.Location = new System.Drawing.Point(412, 22);
+            this.chk不显示超时未出人员.Name = "chk不显示超时未出人员";
+            this.chk不显示超时未出人员.Size = new System.Drawing.Size(170, 19);
+            this.chk不显示超时未出人员.TabIndex = 61;
+            this.chk不显示超时未出人员.Text = "不显示超时未出人员";
+            this.chk不显示超时未出人员.UseVisualStyleBackColor = true;
             // 
             // FrmMonitorSetting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(910, 464);
+            this.Controls.Add(this.chk不显示超时未出人员);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.label2);
@@ -360,5 +374,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colNameEnter;
         private System.Windows.Forms.DataGridViewTextBoxColumn colIDExit;
         private System.Windows.Forms.DataGridViewTextBoxColumn colNameExit;
+        private System.Windows.Forms.CheckBox chk不显示超时未出人员;
     }
 }

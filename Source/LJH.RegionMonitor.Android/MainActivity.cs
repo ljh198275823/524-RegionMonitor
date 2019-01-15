@@ -4,6 +4,7 @@ using System.Linq;
 using Android.App;
 using Android.Widget;
 using Android.OS;
+using Android.Media;
 using Android.Content;
 using Android.Graphics;
 using System.Threading;
@@ -20,6 +21,7 @@ namespace LJH.RegionMonitor.AndroidAPP
     public class MainActivity : Activity
     {
         #region 私有变量
+        private readonly int _GetReionTicks = 10;
         private readonly string _Url = @"http://192.168.2.116:13002/rm/api";
         //private readonly string _Url = @"http://47.92.81.39:13002/rm/api";
         private MonitorRegion _CurrentRegion = null;
@@ -31,6 +33,7 @@ namespace LJH.RegionMonitor.AndroidAPP
         private AlertDialog _CurDialog = null;
         private DateTime _CurDialogCreateTime = DateTime.MinValue;
         private System.Timers.Timer _Timer = null;
+        private MediaPlayer _MediaPlayer = null;
         #endregion
 
         #region 私有方法
@@ -51,6 +54,7 @@ namespace LJH.RegionMonitor.AndroidAPP
 
         private void FreshRegion_Thread()
         {
+            int ticks = 0;
             while (true)
             {
                 try
@@ -58,6 +62,20 @@ namespace LJH.RegionMonitor.AndroidAPP
                     Thread.Sleep(1000);
                     if (_CurrentRegion == null) this.RunOnUiThread(() => InitCurrentRegion());
                     if (_CurrentRegion == null) continue;
+                    if(ticks >=_GetReionTicks )
+                    {
+                        var ret = new RegionClient(_Url).GetByID(1, true);
+                        if (ret.Result == ResultCode.Successful && ret.QueryObject != null)
+                        {
+                            _CurrentRegion.SetRegionParams(ret.QueryObject);
+                        }
+                        _LastCardEvent = null;
+                        ticks = 0;
+                    }
+                    else
+                    {
+                        ticks++;
+                    }
                     var con = new CardEventSearchCondition() { EventTime = new DateTimeRange() { Begin = _LastDateTime, End = DateTime.Now.AddMinutes(30) } }; //这里获取事件的时间为当前时间再往前半个小时
                     List<CardEvent> events = new CardEventClient(_Url).GetItems(con, true).QueryObjects;
                     if (events != null && events.Count > 0)
@@ -68,7 +86,10 @@ namespace LJH.RegionMonitor.AndroidAPP
                             _CurrentRegion.HandleCardEvent(item);
                         }
                         _LastDateTime = events.Max(it => it.EventTime).AddSeconds(-10);
-                        if (!_FirstTime) _LastCardEvent = events.LastOrDefault(it => _CurrentRegion.IsMyDoor(it.DoorID));
+                        if (!_FirstTime)
+                        {
+                            _LastCardEvent = events.LastOrDefault(it => _CurrentRegion.IsMyDoor(it.DoorID));
+                        }
                     }
                     if (_FirstTime) _FirstTime = false;
                     if (_CurrentRegion.InregionUsersChanged)
@@ -114,6 +135,7 @@ namespace LJH.RegionMonitor.AndroidAPP
                 _CurDialog.Dismiss();
                 _CurDialog = null;
                 _Timer.Stop();
+                StopAudio();
             }
             else if (_CurDialog == null)
             {
@@ -133,6 +155,29 @@ namespace LJH.RegionMonitor.AndroidAPP
             catch (System.Exception ex)
             {
                 return null;
+            }
+        }
+
+        private void StartAudio()
+        {
+            if (_MediaPlayer == null)
+            {
+                _MediaPlayer = MediaPlayer.Create(this, Resource.Raw.Alerting);
+            }
+            else
+            {
+                _MediaPlayer.Reset();
+                _MediaPlayer.Prepare();
+                _MediaPlayer.Start();
+                _MediaPlayer.Looping = true;
+            }
+        }
+
+        private void StopAudio()
+        {
+            if (_MediaPlayer!= null)
+            {
+                _MediaPlayer.Stop();
             }
         }
         #endregion
@@ -166,6 +211,12 @@ namespace LJH.RegionMonitor.AndroidAPP
                 _ReadCardEventThread = null;
             }
             if (_Timer != null && _Timer.Enabled) _Timer.Stop();
+            if (_MediaPlayer != null)
+            {
+                _MediaPlayer.Stop();
+                _MediaPlayer.Release();
+                _MediaPlayer = null;
+            }
             base.OnPause();
         }
 
@@ -255,6 +306,7 @@ namespace LJH.RegionMonitor.AndroidAPP
                     }
                 }
             }
+            if (isIn) StartAudio();
         }
 
         private AlertDialog CreateDialog()

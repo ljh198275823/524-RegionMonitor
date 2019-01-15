@@ -21,6 +21,10 @@ namespace LJH.RegionMonitor.Model
         /// </summary>
         public string Name { get; set; }
         /// <summary>
+        /// 获取或设置隐藏超时未出人员
+        /// </summary>
+        public bool HideTimeOutPerson { get; set; }
+        /// <summary>
         /// 获取或设置所有入场门禁点
         /// </summary>
         public List<string> EnterDoors { get; set; }
