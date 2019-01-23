@@ -32,7 +32,7 @@ namespace LJH.RegionMonitor.Model
         /// </summary>
         public string Certificate { get; set; }
 
-        public string Photo { get; set; }
+        public byte[] Photo { get; set; }
         /// <summary>
         /// 获取或设置照片URL
         /// </summary>

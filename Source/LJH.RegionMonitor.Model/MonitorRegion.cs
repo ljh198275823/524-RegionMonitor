@@ -23,7 +23,6 @@ namespace LJH.RegionMonitor.Model
         #region 私有变量
         private object _PersonLocker = new object();
         private Dictionary<string, InRegionPerson> _Person = new Dictionary<string, InRegionPerson>();
-        private bool _PersonChanged = false;
         #endregion
 
         #region 公共属性
@@ -43,6 +42,10 @@ namespace LJH.RegionMonitor.Model
         /// 获取或设置隐藏超时未出人员
         /// </summary>
         public bool HideTimeOutPerson { get; set; }
+        /// <summary>
+        /// 获取或设置区域人员是否有变化
+        /// </summary>
+        public bool PersonChanged { get; set; }
         #endregion
 
         #region 只读属性
@@ -55,24 +58,10 @@ namespace LJH.RegionMonitor.Model
             {
                 lock (_PersonLocker)
                 {
-                    _PersonChanged = false; //获取到当前的所有人员后,变化标志设置为假
                     return (from u in _Person.Values
                             where u.IsInRegion || (!HideTimeOutPerson && u.IsTimeout) //只有在场和超时未出的人员是有效的在场人员
                             orderby u.EnterDateTime ascending
                             select u).ToList();
-                }
-            }
-        }
-        /// <summary>
-        /// 场内人没是否有变化
-        /// </summary>
-        public bool InregionUsersChanged
-        {
-            get
-            {
-                lock (_PersonLocker)
-                {
-                    return _PersonChanged;
                 }
             }
         }
@@ -86,14 +75,14 @@ namespace LJH.RegionMonitor.Model
                 if (!_Person.ContainsKey(item.UserID))
                 {
                     _Person.Add(item.UserID, new InRegionPerson(item));
-                    _PersonChanged = true;
+                    PersonChanged = true;
                 }
                 else
                 {
                     if (_Person[item.UserID].EnterDateTime < item.EventTime) //要判断一下本次刷卡时间是否大于人员入场时间
                     {
                         _Person[item.UserID].EnterDateTime = item.EventTime;
-                        _PersonChanged = true;
+                        PersonChanged = true;
                     }
                 }
             }
@@ -108,7 +97,7 @@ namespace LJH.RegionMonitor.Model
                     if (_Person[item.UserID].EnterDateTime < item.EventTime) //要判断一下本次刷卡时间是否大于人员入场时间
                     {
                         _Person.Remove(item.UserID);
-                        _PersonChanged = true;
+                        PersonChanged = true;
                     }
                 }
             }
@@ -152,8 +141,10 @@ namespace LJH.RegionMonitor.Model
             if(this.HideTimeOutPerson !=region.HideTimeOutPerson )
             {
                 this.HideTimeOutPerson = region.HideTimeOutPerson;
-                _PersonChanged = true;
+                PersonChanged = true;
             }
+            this.EnterDoors = region.EnterDoors;
+            this.ExitDoors = this.ExitDoors;
         }
         #endregion
     }

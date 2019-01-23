@@ -34,6 +34,7 @@ namespace LJH.RegionMonitor.AndroidAPP
         private DateTime _CurDialogCreateTime = DateTime.MinValue;
         private System.Timers.Timer _Timer = null;
         private MediaPlayer _MediaPlayer = null;
+        private Dictionary<string, PersonDetail> _DicPerson = new Dictionary<string, PersonDetail>();
         #endregion
 
         #region 私有方法
@@ -89,11 +90,13 @@ namespace LJH.RegionMonitor.AndroidAPP
                         if (!_FirstTime)
                         {
                             _LastCardEvent = events.LastOrDefault(it => _CurrentRegion.IsMyDoor(it.DoorID));
+                            GetPersonDetail(_LastCardEvent.UserID);
                         }
                     }
                     if (_FirstTime) _FirstTime = false;
-                    if (_CurrentRegion.InregionUsersChanged)
+                    if (_CurrentRegion.PersonChanged )
                     {
+                        _CurrentRegion.PersonChanged = false;
                         this.RunOnUiThread(() => FreshRegion());
                     }
                 }
@@ -105,6 +108,21 @@ namespace LJH.RegionMonitor.AndroidAPP
                 {
 
                 }
+            }
+        }
+
+        private void GetPersonDetail(string userID)
+        {
+            if (_DicPerson.ContainsKey(userID)) return;
+            var person = new WebAPIClient.PersonDetailClient(_Url).GetByID(userID, true).QueryObject;
+            if (person != null)
+            {
+                if (!string.IsNullOrEmpty(person.PhotoUrl))
+                {
+                    var bytes = DownloadPhoto(person.PhotoUrl);
+                    person.Photo = bytes;
+                }
+                _DicPerson.Add(userID, person);
             }
         }
 
@@ -130,12 +148,11 @@ namespace LJH.RegionMonitor.AndroidAPP
 
         private void _Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            if (_CurDialog != null && _CurDialogCreateTime.AddSeconds(30) <= DateTime.Now)
+            if (_CurDialog != null && _CurDialogCreateTime.AddSeconds(15) <= DateTime.Now)
             {
                 _CurDialog.Dismiss();
                 _CurDialog = null;
                 _Timer.Stop();
-                //StopAudio();
             }
             else if (_CurDialog == null)
             {
@@ -256,21 +273,18 @@ namespace LJH.RegionMonitor.AndroidAPP
             txtTime.Text = item.EnterDateTime.ToString("yyyy-MM-dd HH:mm:ss");
             var picAlarm = _CurDialog.FindViewById<ImageView>(Resource.Id.picAlarm);
             picAlarm.Visibility = Android.Views.ViewStates.Gone;
-            var person = new WebAPIClient.PersonDetailClient(_Url).GetByID(item.UserID, true).QueryObject;
-            if (person != null)
+            if (!_DicPerson.ContainsKey(item.UserID)) GetPersonDetail(item.UserID); //如果不存在此用户信息，则先获取一次
+            if (_DicPerson.ContainsKey(item.UserID))
             {
+                var person = _DicPerson[item.UserID];
                 var txtPhone = _CurDialog.FindViewById<TextView>(Resource.Id.txtPhone);
                 txtPhone.Text = person.Phone;
                 var picPhoto = _CurDialog.FindViewById<ImageView>(Resource.Id.picPhoto);
                 picPhoto.SetImageBitmap(null);
-                if (!string.IsNullOrEmpty(person.PhotoUrl))
+                if (person.Photo != null && person.Photo.Length > 0)
                 {
-                    var bytes = DownloadPhoto(person.PhotoUrl);
-                    if (bytes != null && bytes.Length > 0)
-                    {
-                        var bmp = BitmapFactory.DecodeByteArray(bytes, 0, bytes.Length);
-                        picPhoto.SetImageBitmap(bmp);
-                    }
+                    var bmp = BitmapFactory.DecodeByteArray(person.Photo, 0, person.Photo.Length);
+                    picPhoto.SetImageBitmap(bmp);
                 }
             }
         }
@@ -292,21 +306,17 @@ namespace LJH.RegionMonitor.AndroidAPP
             var picAlarm = _CurDialog.FindViewById<ImageView>(Resource.Id.picAlarm);
             if (!isIn) picAlarm.Visibility = Android.Views.ViewStates.Gone;
             else picAlarm.Visibility = Android.Views.ViewStates.Visible;
-            var person = new WebAPIClient.PersonDetailClient(_Url).GetByID(ce.UserID, true).QueryObject;
-            if (person != null)
+            if (_DicPerson.ContainsKey(ce.UserID))
             {
+                var person = _DicPerson[ce.UserID];
                 var txtPhone = _CurDialog.FindViewById<TextView>(Resource.Id.txtPhone);
                 txtPhone.Text = person.Phone;
                 var picPhoto = _CurDialog.FindViewById<ImageView>(Resource.Id.picPhoto);
                 picPhoto.SetImageBitmap(null);
-                if (!string.IsNullOrEmpty(person.PhotoUrl))
+                if (person.Photo != null && person.Photo.Length > 0)
                 {
-                    var bytes = DownloadPhoto(person.PhotoUrl);
-                    if (bytes != null && bytes.Length > 0)
-                    {
-                        var bmp = BitmapFactory.DecodeByteArray(bytes, 0, bytes.Length);
-                        picPhoto.SetImageBitmap(bmp);
-                    }
+                    var bmp = BitmapFactory.DecodeByteArray(person.Photo, 0, person.Photo.Length);
+                    picPhoto.SetImageBitmap(bmp);
                 }
             }
             if (isIn) StartAudio();
@@ -322,7 +332,6 @@ namespace LJH.RegionMonitor.AndroidAPP
             var builder = new AlertDialog.Builder(this);
             var _AlertView = LayoutInflater.Inflate(Resource.Layout.FrmUserDetail, null);
             builder.SetView(_AlertView);
-            //builder.SetPositiveButton("确定", AlertDialog_Click);
             _Timer.Start();
             return builder.Show();
         }
