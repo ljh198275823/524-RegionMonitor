@@ -143,8 +143,6 @@ namespace LJH.RegionMonitor.Model
                 this.HideTimeOutPerson = region.HideTimeOutPerson;
                 PersonChanged = true;
             }
-            this.EnterDoors = region.EnterDoors;
-            this.ExitDoors = this.ExitDoors;
         }
         #endregion
     }

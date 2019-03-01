@@ -16,7 +16,6 @@ using Newtonsoft.Json;
 
 namespace LJH.RegionMonitor.AndroidAPP
 {
-    //[Activity(Label = "@string/app_name", MainLauncher = true, Icon = "@drawable/view" ,Theme = "@android:style/Theme.Material.Light.DarkActionBar")]
     [Activity(Label = "@string/app_name", MainLauncher = true, Icon = "@drawable/view")]
     public class MainActivity : Activity
     {
@@ -26,7 +25,7 @@ namespace LJH.RegionMonitor.AndroidAPP
         //private readonly string _Url = @"http://47.92.81.39:13002/rm/api";
         private MonitorRegion _CurrentRegion = null;
         private Thread _ReadCardEventThread = null;
-        private DateTime _LastDateTime = DateTime.MinValue;
+        //private DateTime _LastDateTime = DateTime.MinValue;
         private ListView _RegionView = null;
         private CardEvent _LastCardEvent = null;
         private bool _FirstTime = true;
@@ -48,14 +47,13 @@ namespace LJH.RegionMonitor.AndroidAPP
             }
             if (_CurrentRegion != null)
             {
-                _LastDateTime = DateTime.Now.AddDays(-2);  //从某个时间点的刷卡记录开始算起,一般来说人员不会在区域里面呆超过三天
                 _FirstTime = true;
             }
         }
 
         private void FreshRegion_Thread()
         {
-            int ticks = 0;
+            //int ticks = 0;
             while (true)
             {
                 try
@@ -63,21 +61,14 @@ namespace LJH.RegionMonitor.AndroidAPP
                     Thread.Sleep(1000);
                     if (_CurrentRegion == null) this.RunOnUiThread(() => InitCurrentRegion());
                     if (_CurrentRegion == null) continue;
-                    if(ticks >=_GetReionTicks )
+                    var con = new CardEventSearchCondition()
                     {
-                        var ret = new RegionClient(_Url).GetByID(1, true);
-                        if (ret.Result == ResultCode.Successful && ret.QueryObject != null)
+                        EventTime = new DateTimeRange()
                         {
-                            _CurrentRegion.SetRegionParams(ret.QueryObject);
+                            Begin = _FirstTime ? DateTime.Now.AddDays(-2) : DateTime.Now.AddSeconds(-10), //第一次获取两天之前的记录
+                            End = DateTime.Now.AddMinutes(30)   //这里获取事件的时间为当前时间再往前半个小时
                         }
-                        _LastCardEvent = null;
-                        ticks = 0;
-                    }
-                    else
-                    {
-                        ticks++;
-                    }
-                    var con = new CardEventSearchCondition() { EventTime = new DateTimeRange() { Begin = _LastDateTime, End = DateTime.Now.AddMinutes(30) } }; //这里获取事件的时间为当前时间再往前半个小时
+                    };
                     List<CardEvent> events = new CardEventClient(_Url).GetItems(con, true).QueryObjects;
                     if (events != null && events.Count > 0)
                     {
@@ -86,7 +77,6 @@ namespace LJH.RegionMonitor.AndroidAPP
                         {
                             _CurrentRegion.HandleCardEvent(item);
                         }
-                        _LastDateTime = events.Max(it => it.EventTime).AddSeconds(-10);
                         if (!_FirstTime)
                         {
                             _LastCardEvent = events.LastOrDefault(it => _CurrentRegion.IsMyDoor(it.DoorID));
