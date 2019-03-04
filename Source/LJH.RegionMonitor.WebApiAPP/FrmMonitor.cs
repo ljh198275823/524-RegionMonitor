@@ -132,7 +132,7 @@ namespace LJH.RegionMonitor.WebApiAPP
         private void tmrGetEvents_Tick(object sender, EventArgs e)
         {
             lblCurTime.Text = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-            if (_CurrentRegion != null && _CurrentRegion.InregionUsersChanged)
+            if (_CurrentRegion != null && _CurrentRegion.PersonChanged)
             {
                 List<InRegionPerson> users = _CurrentRegion.InregionUsers;
                 this.lblInregionCount.Text = (users == null || users.Count == 0) ? "0" : users.Count(it => it.IsInRegion || it.IsTimeout).ToString();

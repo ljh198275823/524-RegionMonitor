@@ -65,7 +65,7 @@ namespace LJH.RegionMonitor.AndroidAPP
                     {
                         EventTime = new DateTimeRange()
                         {
-                            Begin = _FirstTime ? DateTime.Now.AddDays(-2) : DateTime.Now.AddSeconds(-10), //第一次获取两天之前的记录
+                            Begin = _FirstTime ? DateTime.Now.AddDays(-2) : DateTime.Now.AddMinutes(-30), //第一次获取两天之前的记录
                             End = DateTime.Now.AddMinutes(30)   //这里获取事件的时间为当前时间再往前半个小时
                         }
                     };
@@ -84,7 +84,7 @@ namespace LJH.RegionMonitor.AndroidAPP
                         }
                     }
                     if (_FirstTime) _FirstTime = false;
-                    if (_CurrentRegion.PersonChanged )
+                    if (_CurrentRegion.PersonChanged)
                     {
                         _CurrentRegion.PersonChanged = false;
                         this.RunOnUiThread(() => FreshRegion());
