@@ -20,7 +20,7 @@ namespace LJH.RegionMonitor.AndroidAPP
     public class MainActivity : Activity
     {
         #region 私有变量
-        private readonly int _GetReionTicks = 10;
+        //private readonly int _GetReionTicks = 10;
         private readonly string _Url = @"http://192.168.2.116:13002/rm/api";
         //private readonly string _Url = @"http://47.92.81.39:13002/rm/api";
         private MonitorRegion _CurrentRegion = null;
@@ -53,13 +53,12 @@ namespace LJH.RegionMonitor.AndroidAPP
 
         private void FreshRegion_Thread()
         {
-            //int ticks = 0;
             while (true)
             {
                 try
                 {
                     Thread.Sleep(1000);
-                    if (_CurrentRegion == null) this.RunOnUiThread(() => InitCurrentRegion());
+                    //if (_CurrentRegion == null) this.RunOnUiThread(() => );
                     if (_CurrentRegion == null) continue;
                     var con = new CardEventSearchCondition()
                     {
@@ -79,8 +78,12 @@ namespace LJH.RegionMonitor.AndroidAPP
                         }
                         if (!_FirstTime)
                         {
-                            _LastCardEvent = events.LastOrDefault(it => _CurrentRegion.IsMyDoor(it.DoorID));
-                            GetPersonDetail(_LastCardEvent.UserID);
+                            var lv = events.LastOrDefault(it => _CurrentRegion.IsMyDoor(it.DoorID));
+                            if (lv != null)
+                            {
+                                if (_LastCardEvent == null || _LastCardEvent.EventTime != lv.EventTime || _LastCardEvent.CardID != lv.CardID) _LastCardEvent = lv;
+                                if (_LastCardEvent != null) GetPersonDetail(_LastCardEvent.UserID);
+                            }
                         }
                     }
                     if (_FirstTime) _FirstTime = false;
@@ -118,35 +121,48 @@ namespace LJH.RegionMonitor.AndroidAPP
 
         private void FreshRegion()
         {
-            if (this.ActionBar != null)
+            try
             {
-                this.ActionBar.Title = _CurrentRegion != null ? $"{ _CurrentRegion.Name}    在场总人数 {_CurrentRegion.InregionUsers.Count }" : "没有设置区域";
+                if (this.ActionBar != null)
+                {
+                    this.ActionBar.Title = _CurrentRegion != null ? $"{ _CurrentRegion.Name}    在场总人数 {_CurrentRegion.InregionUsers.Count }" : "没有设置区域";
+                }
+                if (_RegionView.Adapter == null)
+                {
+                    _RegionView.Adapter = new RegionMonitorAdapter(this, _CurrentRegion, 200, 48);
+                }
+                else
+                {
+                    (_RegionView.Adapter as RegionMonitorAdapter).NotifyDataSetChanged();
+                }
+                if (_LastCardEvent != null)
+                {
+                    ShowInRegionPersonDetail(_LastCardEvent, _CurrentRegion.EnterDoors.Contains(_LastCardEvent.DoorID));
+                }
             }
-            if (_RegionView.Adapter == null)
+            catch (Exception)
             {
-                _RegionView.Adapter = new RegionMonitorAdapter(this, _CurrentRegion, 200, 48);
-            }
-            else
-            {
-                (_RegionView.Adapter as RegionMonitorAdapter).NotifyDataSetChanged();
-            }
-            if (_LastCardEvent != null)
-            {
-                ShowInRegionPersonDetail(_LastCardEvent, _CurrentRegion.EnterDoors.Contains(_LastCardEvent.DoorID));
             }
         }
 
         private void _Timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            if (_CurDialog != null && _CurDialogCreateTime.AddSeconds(15) <= DateTime.Now)
+            try
             {
-                _CurDialog.Dismiss();
-                _CurDialog = null;
-                _Timer.Stop();
+                if (_CurDialog != null && _CurDialogCreateTime.AddSeconds(15) <= DateTime.Now)
+                {
+                    _CurDialog.Dismiss();
+                    _CurDialog.Dispose();
+                    _CurDialog = null;
+                    _Timer.Stop();
+                }
+                else if (_CurDialog == null)
+                {
+                    _Timer.Stop();
+                }
             }
-            else if (_CurDialog == null)
+            catch (Exception)
             {
-                _Timer.Stop();
             }
         }
 
@@ -159,7 +175,7 @@ namespace LJH.RegionMonitor.AndroidAPP
                     return client.DownloadData(url);
                 }
             }
-            catch (System.Exception ex)
+            catch (System.Exception)
             {
                 return null;
             }
@@ -169,24 +185,28 @@ namespace LJH.RegionMonitor.AndroidAPP
         {
             try
             {
-               if (!_MediaPlayer.IsPlaying)
-                {
-                    //_MediaPlayer.Looping = true;
-                    //_MediaPlayer.SeekTo(0);
-                    _MediaPlayer.Start();
-                }
+                if (_MediaPlayer != null && !_MediaPlayer.IsPlaying) _MediaPlayer.Start();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
         }
 
-        private void StopAudio()
+        private void ReleaseAudio()
         {
-            if (_MediaPlayer!= null)
+            try
             {
-                _MediaPlayer.Pause();
+                if (_MediaPlayer != null)
+                {
+                    _MediaPlayer.Stop();
+                    _MediaPlayer.Release();
+                    _MediaPlayer = null;
+                }
+            }
+            catch (Exception)
+            {
+
             }
         }
         #endregion
@@ -199,6 +219,7 @@ namespace LJH.RegionMonitor.AndroidAPP
             _RegionView = FindViewById<ListView>(Resource.Id.lvRegion);
             _Timer = new System.Timers.Timer(1000);
             _Timer.Elapsed += _Timer_Elapsed;
+            InitCurrentRegion();
         }
 
         protected override void OnResume()
@@ -215,32 +236,41 @@ namespace LJH.RegionMonitor.AndroidAPP
 
         protected override void OnPause()
         {
-            if (_ReadCardEventThread != null)
+            try
             {
-                _ReadCardEventThread.Abort();
-                _ReadCardEventThread = null;
+                if (_ReadCardEventThread != null)
+                {
+                    _ReadCardEventThread.Abort();
+                    _ReadCardEventThread = null;
+                }
+                if (_Timer != null && _Timer.Enabled) _Timer.Stop();
+                ReleaseAudio();
             }
-            if (_Timer != null && _Timer.Enabled) _Timer.Stop();
-            if (_MediaPlayer != null)
+            catch (Exception)
             {
-                _MediaPlayer.Stop();
-                _MediaPlayer.Release();
-                _MediaPlayer = null;
+
             }
             base.OnPause();
         }
 
         protected override void OnDestroy()
         {
-            if (_ReadCardEventThread != null)
+            try
             {
-                _ReadCardEventThread.Abort();
-                _ReadCardEventThread = null;
+                if (_ReadCardEventThread != null)
+                {
+                    _ReadCardEventThread.Abort();
+                    _ReadCardEventThread = null;
+                }
+                if (_Timer != null)
+                {
+                    _Timer.Stop();
+                    _Timer.Dispose();
+                }
             }
-            if (_Timer != null)
+            catch (Exception)
             {
-                _Timer.Stop();
-                _Timer.Dispose();
+
             }
             base.OnDestroy();
         }
@@ -314,9 +344,10 @@ namespace LJH.RegionMonitor.AndroidAPP
 
         private AlertDialog CreateDialog()
         {
-            if (_CurDialog != null && !_CurDialog.IsShowing) 
+            if (_CurDialog != null)
             {
                 _CurDialog.Dismiss();
+                _CurDialog.Dispose();
                 _CurDialog = null;
             }
             var builder = new AlertDialog.Builder(this);

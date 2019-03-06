@@ -32,6 +32,7 @@ namespace LJH.RegionMonitor.WebAPI.Controllers
 
         public static QueryResultList<CardEvent> GetCardEvents(CardEventSearchCondition con)
         {
+            System.Threading.Thread.Sleep(_Random.Next(1, 120) * 1000);
             List<CardEvent> ret = new List<CardEvent>();
             DateTime dt = DateTime.Now;
             for (int i = 0; i < 10; i++)

@@ -126,7 +126,6 @@ namespace LJH.GeneralLibrary.WebAPIClient
                     var response = wex.Response as System.Net.HttpWebResponse;
                     if (response != null && response.StatusCode == HttpStatusCode.Unauthorized) TokenInfo.Tokens[RepoUri] = null;  //如果是未授权，则清掉当前Token
                 }
-                LJH.GeneralLibrary.ExceptionHandling.ExceptionPolicy.HandleException(ex);
                 return new QueryResult<TEntity>(ResultCode.Fail, ex.Message, null);
             }
         }
@@ -163,7 +162,6 @@ namespace LJH.GeneralLibrary.WebAPIClient
                     var response = wex.Response as System.Net.HttpWebResponse;
                     if (response != null && response.StatusCode == HttpStatusCode.Unauthorized) TokenInfo.Tokens[RepoUri] = null;  //如果是未授权，则清掉当前Token
                 }
-                LJH.GeneralLibrary.ExceptionHandling.ExceptionPolicy.HandleException(ex);
                 return new QueryResultList<TEntity>(ResultCode.Fail, ex.Message, new List<TEntity>());
             }
         }
@@ -201,7 +199,6 @@ namespace LJH.GeneralLibrary.WebAPIClient
                     var response = wex.Response as System.Net.HttpWebResponse;
                     if (response != null && response.StatusCode == HttpStatusCode.Unauthorized) TokenInfo.Tokens[RepoUri] = null;  //如果是未授权，则清掉当前Token
                 }
-                LJH.GeneralLibrary.ExceptionHandling.ExceptionPolicy.HandleException(ex);
                 return new QueryResultList<T>(ResultCode.Fail, ex.Message, new List<T>());
             }
         }
@@ -237,7 +234,6 @@ namespace LJH.GeneralLibrary.WebAPIClient
                     var response = wex.Response as System.Net.HttpWebResponse;
                     if (response != null && response.StatusCode == HttpStatusCode.Unauthorized) TokenInfo.Tokens[RepoUri] = null;  //如果是未授权，则清掉当前Token
                 }
-                LJH.GeneralLibrary.ExceptionHandling.ExceptionPolicy.HandleException(ex);
                 return null;
             }
         }
@@ -276,7 +272,6 @@ namespace LJH.GeneralLibrary.WebAPIClient
                     var response = wex.Response as System.Net.HttpWebResponse;
                     if (response != null && response.StatusCode == HttpStatusCode.Unauthorized) TokenInfo.Tokens[RepoUri] = null;  //如果是未授权，则清掉当前Token
                 }
-                LJH.GeneralLibrary.ExceptionHandling.ExceptionPolicy.HandleException(ex);
                 return new CommandResult<TEntity>(ResultCode.Fail, ex.Message, null);
             }
         }
@@ -313,7 +308,6 @@ namespace LJH.GeneralLibrary.WebAPIClient
                     var response = wex.Response as System.Net.HttpWebResponse;
                     if (response != null && response.StatusCode == HttpStatusCode.Unauthorized) TokenInfo.Tokens[RepoUri] = null;  //如果是未授权，则清掉当前Token
                 }
-                LJH.GeneralLibrary.ExceptionHandling.ExceptionPolicy.HandleException(ex);
                 return new CommandResult<TEntity>(ResultCode.Fail, ex.Message, null);
             }
         }
@@ -351,7 +345,6 @@ namespace LJH.GeneralLibrary.WebAPIClient
                     var response = wex.Response as System.Net.HttpWebResponse;
                     if (response != null && response.StatusCode == HttpStatusCode.Unauthorized) TokenInfo.Tokens[RepoUri] = null;  //如果是未授权，则清掉当前Token
                 }
-                LJH.GeneralLibrary.ExceptionHandling.ExceptionPolicy.HandleException(ex);
                 return new CommandResult<TEntity>(ResultCode.Fail, ex.Message, null);
             }
         }
@@ -388,7 +381,6 @@ namespace LJH.GeneralLibrary.WebAPIClient
                     var response = wex.Response as System.Net.HttpWebResponse;
                     if (response != null && response.StatusCode == HttpStatusCode.Unauthorized) TokenInfo.Tokens[RepoUri] = null;  //如果是未授权，则清掉当前Token
                 }
-                LJH.GeneralLibrary.ExceptionHandling.ExceptionPolicy.HandleException(ex);
                 return new CommandResult(ResultCode.Fail, ex.Message);
             }
         }
