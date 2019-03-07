@@ -34,6 +34,7 @@ namespace LJH.RegionMonitor.AndroidAPP
         private System.Timers.Timer _Timer = null;
         private MediaPlayer _MediaPlayer = null;
         private Dictionary<string, PersonDetail> _DicPerson = new Dictionary<string, PersonDetail>();
+        private List<CardEvent> _LastEvents = new List<CardEvent>();
         #endregion
 
         #region 私有方法
@@ -58,7 +59,6 @@ namespace LJH.RegionMonitor.AndroidAPP
                 try
                 {
                     Thread.Sleep(1000);
-                    //if (_CurrentRegion == null) this.RunOnUiThread(() => );
                     if (_CurrentRegion == null) continue;
                     var con = new CardEventSearchCondition()
                     {
@@ -68,25 +68,25 @@ namespace LJH.RegionMonitor.AndroidAPP
                             End = DateTime.Now.AddMinutes(30)   //这里获取事件的时间为当前时间再往前半个小时
                         }
                     };
+                    _LastCardEvent = null;
                     List<CardEvent> events = new CardEventClient(_Url).GetItems(con, true).QueryObjects;
                     if (events != null && events.Count > 0)
                     {
                         events = (from it in events orderby it.EventTime ascending select it).ToList();
                         foreach (var item in events)
                         {
-                            _CurrentRegion.HandleCardEvent(item);
-                        }
-                        if (!_FirstTime)
-                        {
-                            var lv = events.LastOrDefault(it => _CurrentRegion.IsMyDoor(it.DoorID));
-                            if (lv != null)
+                            if (!_CurrentRegion.IsMyDoor(item.DoorID)) continue;
+                            if (!_LastEvents.Exists(it => it.EventTime == item.EventTime && it.UserID == item.UserID))
                             {
-                                if (_LastCardEvent == null || _LastCardEvent.EventTime != lv.EventTime || _LastCardEvent.CardID != lv.CardID) _LastCardEvent = lv;
-                                if (_LastCardEvent != null) GetPersonDetail(_LastCardEvent.UserID);
+                                _LastEvents.Add(item);
+                                if (!_FirstTime) _LastCardEvent = item;
+                                _CurrentRegion.HandleCardEvent(item);
                             }
                         }
+                        if (_LastCardEvent != null) GetPersonDetail(_LastCardEvent.UserID);
                     }
                     if (_FirstTime) _FirstTime = false;
+                    _LastEvents.RemoveAll(it => it.EventTime < con.EventTime.Begin);
                     if (_CurrentRegion.PersonChanged)
                     {
                         _CurrentRegion.PersonChanged = false;
