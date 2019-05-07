@@ -20,6 +20,8 @@ namespace LJH.RegionMonitor.AndroidAPP
     public class MainActivity : Activity
     {
         #region 私有变量
+        private readonly string _MyDoors = "500KV";
+        //private readonly string _MyDoors = "地下厂房";
         //private readonly int _GetReionTicks = 10;
         private readonly string _Url = @"http://192.168.2.116:13002/rm/api";
         //private readonly string _Url = @"http://47.92.81.39:13002/rm/api";
@@ -79,7 +81,7 @@ namespace LJH.RegionMonitor.AndroidAPP
                             if (!_LastEvents.Exists(it => it.EventTime == item.EventTime && it.UserID == item.UserID))
                             {
                                 _LastEvents.Add(item);
-                                if (!_FirstTime) _LastCardEvent = item;
+                                if (!_FirstTime && IsMyDoor(item.DoorName)) _LastCardEvent = item;
                                 _CurrentRegion.HandleCardEvent(item);
                             }
                         }
@@ -102,6 +104,19 @@ namespace LJH.RegionMonitor.AndroidAPP
 
                 }
             }
+        }
+
+        private bool IsMyDoor(string doorName)
+        {
+            if (_MyDoors == "地下厂房")
+            {
+                return doorName.Contains(_MyDoors);
+            }
+            else if(_MyDoors =="500KV")
+            {
+                return doorName.Contains(_MyDoors) || doorName.Contains("排风竖井");
+            }
+            return true;
         }
 
         private void GetPersonDetail(string userID)
