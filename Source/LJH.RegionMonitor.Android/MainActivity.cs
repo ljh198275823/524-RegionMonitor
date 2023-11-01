@@ -21,13 +21,9 @@ namespace LJH.RegionMonitor.AndroidAPP
     {
         #region 私有变量
         private readonly string _MyDoors = "500KV";
-        //private readonly string _MyDoors = "地下厂房";
-        //private readonly int _GetReionTicks = 10;
         private readonly string _Url = @"http://192.168.2.116:13002/rm/api";
-        //private readonly string _Url = @"http://47.92.81.39:13002/rm/api";
         private MonitorRegion _CurrentRegion = null;
         private Thread _ReadCardEventThread = null;
-        //private DateTime _LastDateTime = DateTime.MinValue;
         private ListView _RegionView = null;
         private CardEvent _LastCardEvent = null;
         private bool _FirstTime = true;
